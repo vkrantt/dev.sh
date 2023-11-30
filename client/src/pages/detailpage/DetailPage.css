@@ -1,0 +1,22 @@
+.custom-col-class pre {
+  /* Your custom styles for the <pre> tag go here */
+  color: red;
+  /* Add more styles as needed */
+}
+
+.custom-col-class pre {
+  font-family: "Consolas", "Courier New", monospace;
+  background-color: #282c34;
+  color: #abb2bf;
+  padding: 1em;
+  overflow-x: auto;
+  border-radius: 5px;
+}
+
+.custom-col-class pre code {
+  display: block;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
