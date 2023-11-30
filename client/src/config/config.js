@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:3030/api";
+// export const BASE_URL = "http://localhost:3030/api";
+export const BASE_URL = "https://dev-sh-hwg0.onrender.com";
 
 export const toastConfig = {
   duration: 2000,
