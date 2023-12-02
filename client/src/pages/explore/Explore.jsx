@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import Tags from "../../components/tags/Tags";
 
 const Explore = () => {
   return (
@@ -13,41 +14,9 @@ const Explore = () => {
             <h5 className="text-blue">Discover more of what matters to you</h5>
 
             <div>
-              <Button
-                className="fw-bold rounded-2 me-2 my-2"
-                size="sm"
-                variant="light"
-              >
-                Programming
-              </Button>
-              <Button
-                className="fw-bold rounded-2 me-2 my-2"
-                size="sm"
-                variant="light"
-              >
-                Data science
-              </Button>
-              <Button
-                className="fw-bold rounded-2 me-2 my-2"
-                size="sm"
-                variant="light"
-              >
-                Technology
-              </Button>
-              <Button
-                className="fw-bold rounded-2 me-2 my-2"
-                size="sm"
-                variant="light"
-              >
-                Machine Learning
-              </Button>
-              <Button
-                className="fw-bold rounded-2 me-2 my-2"
-                size="sm"
-                variant="light"
-              >
-                Productivity
-              </Button>
+              <>
+                <Tags className="fw-bold rounded-2 me-2 my-2 " />
+              </>
             </div>
           </div>
         </Col>

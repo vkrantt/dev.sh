@@ -8,6 +8,7 @@ import { BASE_URL } from "../../config/config";
 import { get } from "../handlers/storage";
 import { useEffect } from "react";
 import LoginModal from "../../modals/login/Loginmodal";
+import Loader from "../loader/Loader";
 
 const Usercard = ({ user, date, showFollowBtn = true }) => {
   const [loggedInUser] = useState(getUserDetail());
@@ -92,7 +93,7 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
           onClick={() => handleFollow(user._id)}
           className="bg-blue px-4 text-primary mx-4"
         >
-          {follow ? "Following" : "Follow"}
+          {loading ? <Loader /> : follow ? "Following" : "Follow"}
         </Button>
       )}
     </div>

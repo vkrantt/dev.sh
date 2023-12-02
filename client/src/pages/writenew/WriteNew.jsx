@@ -9,6 +9,7 @@ import { BASE_URL } from "../../config/config";
 import axios from "axios";
 import { get } from "../../components/handlers/storage";
 import { useEffect } from "react";
+import Loader from "../../components/loader/Loader";
 
 const WriteNew = () => {
   const [searchParams] = useSearchParams();
@@ -101,7 +102,6 @@ const WriteNew = () => {
         [{ align: [] }],
         [{ color: [] }, { background: [] }],
         [{ font: [] }],
-        ["code-block"],
         ["clean"],
       ],
     },
@@ -183,7 +183,9 @@ const WriteNew = () => {
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
           <Form>
             <Row className="mb-3">
-              <h5 className="text-blue">Create and share</h5>
+              <h1 className="display-4 fw-bold text-blue my-3">
+                Create and share
+              </h1>
             </Row>
             <Row className="mb-3">
               <Form.Label>Title</Form.Label>
@@ -208,11 +210,19 @@ const WriteNew = () => {
                 value={form.tag}
               >
                 <option>Select Tag</option>
-                <option value="javascript">Javascript</option>
-                <option value="python">Python</option>
-                <option value="nodejs">Node Js</option>
-                <option value="mongodb">Mongodb</option>
-                <option value="react">React</option>
+                <option value="programming">Programming</option>
+                <option value="data science">Data science</option>
+                <option value="Technology">Technology</option>
+                <option value="machine learning">Machine Learning</option>
+                <option value="productivity">Productivity</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="social">Social</option>
+                <option value="business">Business</option>
+                <option value="marketing">Marketing</option>
+                <option value="relationships">Relationships</option>
+                <option value="world">World</option>
+                <option value="others">Others</option>
               </Form.Select>
             </Row>
 
@@ -242,7 +252,7 @@ const WriteNew = () => {
               type="submit"
               onClick={handleSubmit}
             >
-              Post
+              {loading ? <Loader /> : postId ? "Update" : "Post"}
             </Button>
           </Form>
         </Col>

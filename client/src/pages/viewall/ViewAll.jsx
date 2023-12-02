@@ -6,7 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config/config";
 import { useState } from "react";
 import { get } from "../../components/handlers/storage";
-import Loader from "../../components/loader/Loader";
+import Homecard from "../../components/skeleton/homecard";
 
 const ViewAll = () => {
   const [posts, setPosts] = useState([]);
@@ -52,9 +52,10 @@ const ViewAll = () => {
 
   return (
     <Container>
+      <h1 className="display-4 fw-bold text-blue my-3">View</h1>
       {loading ? (
-        <div className="text-center my-5">
-          <Loader />
+        <div className=" my-5">
+          <Homecard count="5" />
         </div>
       ) : (
         posts.map((post) => (

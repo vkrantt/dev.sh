@@ -1,21 +1,11 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import { getUserDetail } from "../../services/user";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../config/config";
 import Loader from "../../components/loader/Loader";
-import userProfile from "../../assets/userprofile.png";
 import { X } from "lucide-react";
 import { get } from "../../components/handlers/storage";
 
@@ -151,7 +141,7 @@ const Profile = () => {
         .then(function (response) {
           setLoading(false);
           setTimeout(() => {
-            localStorage.removeItem("dev_token");
+            localStorage.removeItem("dsh_token");
             window.location.pathname = "/";
           }, 2000);
         })
@@ -165,6 +155,7 @@ const Profile = () => {
     <Container>
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
+          <h1 className="display-4 fw-bold text-blue my-3">Profile</h1>
           {/* Image */}
           <div className="d-flex align-items-center justify-content-between">
             <div>

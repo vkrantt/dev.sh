@@ -14,6 +14,8 @@ import { useState } from "react";
 import { getUserDetail } from "./services/user";
 import WriteNew from "./pages/writenew/WriteNew";
 import ViewAll from "./pages/viewall/ViewAll";
+import AdminAuthguard from "./routes/AdminAuthguard";
+import SuperAdminAuthguard from "./routes/SuperAdminAuthguard";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -32,13 +34,28 @@ const App = () => {
           />
           <Route
             path="/featured"
-            element={<Authguard children={<Featured />} />}
+            element={
+              <SuperAdminAuthguard
+                children={<Featured />}
+                isSuperAdmin={user?.isSuperAdmin}
+              />
+            }
           />
           <Route path="/saved" element={<Authguard children={<Saved />} />} />
           <Route path="/detail/:id" element={<DetailPage />} />
 
-          <Route path="/write" element={<WriteNew />} />
-          <Route path="/view" element={<ViewAll />} />
+          <Route
+            path="/write"
+            element={
+              <AdminAuthguard children={<WriteNew />} isAdmin={user?.isAdmin} />
+            }
+          />
+          <Route
+            path="/view"
+            element={
+              <AdminAuthguard children={<ViewAll />} isAdmin={user?.isAdmin} />
+            }
+          />
 
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>

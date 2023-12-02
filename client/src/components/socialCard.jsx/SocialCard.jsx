@@ -41,7 +41,7 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
   };
 
   return (
-    <div className="card border-0 mb-4 bg-dark text-light">
+    <div className="card border-0 mb-4 bg-dark text-light w-100">
       {/* Render the login modal */}
       <LoginModal
         handleShow={showLoginModal}

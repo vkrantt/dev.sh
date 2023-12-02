@@ -33,7 +33,7 @@ export async function createPost(req, res) {
 export async function allPosts(req, res) {
   try {
     const query = { shared: true, isDeleted: false };
-    const posts = await Post.find(query);
+    const posts = await Post.find(query).sort({ createdAt: -1 });
     for (let i = 0; i < posts.length; i++) {
       const item = posts[i];
       item.createdBy = await User.findById(item.createdBy).select(

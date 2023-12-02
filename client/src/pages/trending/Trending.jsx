@@ -6,6 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { BASE_URL } from "../../config/config";
 import SocialCard from "../../components/socialCard.jsx/SocialCard";
 import { get } from "../../components/handlers/storage";
+import Homecard from "../../components/skeleton/homecard";
 
 const Trending = () => {
   const [posts, setPosts] = useState([]);
@@ -33,7 +34,12 @@ const Trending = () => {
         <Col lg="8" className="m-auto">
           <h1 className="display-4 fw-bold text-blue mb-5">Trendings</h1>
 
-          {posts &&
+          {loading ? (
+            <div className="">
+              <Homecard count="5" />
+            </div>
+          ) : (
+            posts &&
             posts.map((post, index) => (
               <div key={post._id} className="d-flex align-items-top">
                 <div className="display-1 fw-bold pe-2 text-blue">
@@ -41,7 +47,8 @@ const Trending = () => {
                 </div>
                 <SocialCard post={post} />
               </div>
-            ))}
+            ))
+          )}
         </Col>
       </Row>
     </Container>

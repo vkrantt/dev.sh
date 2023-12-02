@@ -14,11 +14,14 @@ import { Link, useLocation } from "react-router-dom";
 import LoginModal from "../../modals/login/Loginmodal";
 import { get, remove } from "../handlers/storage";
 import { useState } from "react";
+import { getUserDetail } from "../../services/user";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const [user] = useState(getUserDetail());
   const token = get("dsh_token");
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleLogout = () => {
     remove("dsh_token");
@@ -34,7 +37,7 @@ const Header = () => {
   };
 
   return (
-    <Container fluid className="sticky-top top-0 mb-2 bg-dark">
+    <Container fluid className=" top-0 mb-2 bg-dark">
       <Container>
         <Navbar variant="dark" key="lg" expand="lg" className="bg-dark">
           <Container fluid>
@@ -42,6 +45,7 @@ const Header = () => {
               <Logo />
             </Navbar.Brand>
             <Navbar.Toggle
+              onClick={() => setShow(!show)}
               aria-controls="offcanvasNavbar-expand-lg"
               className="p-0 border-0 shadow-none"
             />
@@ -49,8 +53,14 @@ const Header = () => {
               id="offcanvasNavbar-expand-lg"
               aria-labelledby="offcanvasNavbarLabel-expand-lg"
               placement="end"
+              show={show}
+              onHide={() => setShow(!show)}
             >
-              <Offcanvas.Header closeButton>
+              <Offcanvas.Header
+                closeButton
+                className="bg-dark text-light"
+                variant="dark"
+              >
                 <Offcanvas.Title
                   id="offcanvasNavbarLabel-expand-lg"
                   className="d-flex align-items-center"
@@ -58,7 +68,7 @@ const Header = () => {
                   <Logo />
                 </Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body>
+              <Offcanvas.Body className="bg-dark text-light">
                 <Nav className=" d-flex align-items-center justify-content-end flex-grow-1 pe-3">
                   <Nav.Link
                     as={Link}
@@ -67,6 +77,7 @@ const Header = () => {
                         ? "active border-1 border-bottom border-light"
                         : ""
                     }`}
+                    onClick={() => setShow(false)}
                     to="/"
                   >
                     Home
@@ -78,6 +89,7 @@ const Header = () => {
                         ? "active border-1 border-bottom border-light"
                         : ""
                     }`}
+                    onClick={() => setShow(false)}
                     to="/explore"
                   >
                     Explore
@@ -89,6 +101,7 @@ const Header = () => {
                         ? "active border-1 border-bottom border-light"
                         : ""
                     }`}
+                    onClick={() => setShow(false)}
                     to="/trending"
                   >
                     Trending
@@ -99,25 +112,50 @@ const Header = () => {
                       title="More"
                       id={`offcanvasNavbarDropdown-expand-lg`}
                     >
-                      <NavDropdown.Item as={Link} to="/write">
-                        Write New
-                      </NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/view">
-                        View
-                      </NavDropdown.Item>
-
-                      <NavDropdown.Item as={Link} to="/profile">
+                      {user?.isAdmin || user?.isSuperAdmin ? (
+                        <>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/write"
+                          >
+                            Write New
+                          </NavDropdown.Item>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/view"
+                          >
+                            View
+                          </NavDropdown.Item>
+                        </>
+                      ) : null}
+                      {user?.isSuperAdmin ? (
+                        <>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/featured"
+                          >
+                            Featured
+                          </NavDropdown.Item>
+                        </>
+                      ) : null}
+                      <NavDropdown.Item
+                        as={Link}
+                        onClick={() => setShow(false)}
+                        to="/profile"
+                      >
                         Profile
                       </NavDropdown.Item>
 
-                      <NavDropdown.Item as={Link} to="/featured">
-                        Featured
-                      </NavDropdown.Item>
-
-                      <NavDropdown.Item as={Link} to="/saved">
+                      <NavDropdown.Item
+                        as={Link}
+                        onClick={() => setShow(false)}
+                        to="/saved"
+                      >
                         Saved
                       </NavDropdown.Item>
-
                       <NavDropdown.Item onClick={() => handleLogout()}>
                         Logout
                       </NavDropdown.Item>
@@ -132,7 +170,7 @@ const Header = () => {
                         variant="primary"
                         size="sm "
                         onClick={handleShowLoginModal}
-                        className="bg-blue border-2 px-3 rounded-2 text-primary"
+                        className="bg-blue border-2 px-3 mt-sm-2 rounded-2 text-primary"
                       >
                         Login
                       </Button>
@@ -140,7 +178,7 @@ const Header = () => {
                   )}
                 </Nav>
                 <Button variant="none" className="p-0 mb-1">
-                  <Search size={20} strokeWidth={2} />
+                  <Search size={20} strokeWidth={2} color="var(--theme)" />
                 </Button>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

@@ -6,10 +6,22 @@
 
 .dropdown-menu {
   padding: 0 !important;
-  border: 3px solid var(--theme) !important;
   margin-bottom: 20px !important;
 }
 
 .dropdown-item:hover {
   background: var(--theme) !important;
+  color: #000 !important; /* White text color */
+}
+
+.dropdown-menu {
+  background-color: #343a40 !important; /* Dark background color */
+}
+
+.dropdown-item {
+  color: var(--theme) !important;
+}
+
+.btn-close {
+  color: var(--theme) !important;
 }

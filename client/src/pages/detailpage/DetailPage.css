@@ -20,3 +20,11 @@
   font-size: 14px;
   line-height: 1.6;
 }
+
+/* CSS for mobile responsiveness */
+@media (max-width: 767px) {
+  .custom-col-class img {
+    max-width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+}
