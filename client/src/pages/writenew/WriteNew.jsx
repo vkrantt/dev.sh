@@ -195,17 +195,17 @@ const WriteNew = () => {
                   name="title"
                   onChange={handleChange}
                   value={form.title}
-                  className=" shadow-none bg-dark text-light border-0 rounded-0"
+                  className="shadow-none border-2 rounded-0"
                 />
               </Form.Group>
             </Row>
 
             <Row className="mb-3 mx-0">
-              <Form.Label className="mx-0">Tags</Form.Label>
+              <Form.Label>Tags</Form.Label>
               <Form.Select
                 as={Col}
                 aria-label="Default select example"
-                className=" shadow-none bg-dark rounded-0 text-light border-0"
+                className=" shadow-none rounded-0 border-2"
                 onChange={handleSelectTag}
                 value={form.tag}
               >
@@ -229,17 +229,18 @@ const WriteNew = () => {
             <ReactQuill
               ref={quillRef}
               value={value}
+              theme="snow"
               onChange={setValue}
               modules={modules}
               formats={formats}
               style={editorStyle}
-              className="shadow-none bg-dark text-light border-0"
+              className="shadow-none border-2"
             />
 
             <Form.Check
               type="switch"
               id="custom-switch"
-              label="Social share"
+              label="Share publicly"
               className="mt-5"
               size="lg"
               onChange={handleSocialShare}
@@ -247,18 +248,13 @@ const WriteNew = () => {
             />
 
             <Button
-              variant="primary"
-              className=" rounded-2 px-4 text-light mt-4"
+              variant="outline-primary"
+              className=" rounded-0 border-2 px-4 mt-4"
               type="submit"
               onClick={handleSubmit}
+              disabled={!form.title}
             >
-              {loading ? (
-                <Loader variant="light" />
-              ) : postId ? (
-                "Update"
-              ) : (
-                "Post"
-              )}
+              {loading ? <Loader /> : postId ? "Update" : "Post"}
             </Button>
           </Form>
         </Col>

@@ -7,21 +7,8 @@
 .dropdown-menu {
   padding: 0 !important;
   margin-bottom: 20px !important;
-}
-
-.dropdown-item:hover {
-  background: var(--theme) !important;
-  color: #000 !important; /* White text color */
-}
-
-.dropdown-menu {
-  background-color: #343a40 !important; /* Dark background color */
-}
-
-.dropdown-item {
-  color: var(--theme) !important;
-}
-
-.btn-close {
-  color: var(--theme) !important;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.11),
+    0 0.1875rem 0.4375rem rgba(0, 0, 0, 0.13);
+  border: 0 !important;
+  border-radius: 0 !important;
 }

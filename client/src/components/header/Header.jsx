@@ -37,9 +37,9 @@ const Header = () => {
   };
 
   return (
-    <Container fluid className=" top-0 mb-2 bg-dark">
+    <Container fluid className="top-0 mb-2 bg-light shadow-custom">
       <Container>
-        <Navbar variant="dark" key="lg" expand="lg" className="bg-dark">
+        <Navbar variant="light" key="lg" expand="lg">
           <Container fluid>
             <Navbar.Brand as={Link} to="/">
               <Logo show={true} />
@@ -56,11 +56,7 @@ const Header = () => {
               show={show}
               onHide={() => setShow(!show)}
             >
-              <Offcanvas.Header
-                closeButton
-                className="bg-dark text-light"
-                variant="dark"
-              >
+              <Offcanvas.Header closeButton variant="light">
                 <Offcanvas.Title
                   id="offcanvasNavbarLabel-expand-lg"
                   className="d-flex align-items-center"
@@ -68,13 +64,13 @@ const Header = () => {
                   <Logo show={true} />
                 </Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body className="bg-dark text-light">
+              <Offcanvas.Body>
                 <Nav className=" d-flex align-items-center justify-content-end flex-grow-1 pe-3">
                   <Nav.Link
                     as={Link}
                     className={`${
                       pathname === "/"
-                        ? "active border-1 border-bottom border-light"
+                        ? "active border-2 border-bottom border-primary text-primary"
                         : ""
                     }`}
                     onClick={() => setShow(false)}
@@ -86,7 +82,7 @@ const Header = () => {
                     as={Link}
                     className={`${
                       pathname === "/explore"
-                        ? "active border-1 border-bottom border-light"
+                        ? "active border-2 border-bottom border-primary text-primary"
                         : ""
                     }`}
                     onClick={() => setShow(false)}
@@ -98,7 +94,7 @@ const Header = () => {
                     as={Link}
                     className={`${
                       pathname === "/trending"
-                        ? "active border-1 border-bottom border-light"
+                        ? "active border-2 border-bottom border-primary text-primary"
                         : ""
                     }`}
                     onClick={() => setShow(false)}
@@ -118,6 +114,9 @@ const Header = () => {
                             as={Link}
                             onClick={() => setShow(false)}
                             to="/write"
+                            className={`${
+                              pathname === "/write" ? "active" : ""
+                            }`}
                           >
                             Write New
                           </NavDropdown.Item>
@@ -125,6 +124,9 @@ const Header = () => {
                             as={Link}
                             onClick={() => setShow(false)}
                             to="/view"
+                            className={`${
+                              pathname === "/view" ? "active" : ""
+                            }`}
                           >
                             View
                           </NavDropdown.Item>
@@ -136,6 +138,9 @@ const Header = () => {
                             as={Link}
                             onClick={() => setShow(false)}
                             to="/featured"
+                            className={`${
+                              pathname === "/featured" ? "active" : ""
+                            }`}
                           >
                             Featured
                           </NavDropdown.Item>
@@ -145,6 +150,7 @@ const Header = () => {
                         as={Link}
                         onClick={() => setShow(false)}
                         to="/profile"
+                        className={`${pathname === "/profile" ? "active" : ""}`}
                       >
                         Profile
                       </NavDropdown.Item>
@@ -153,6 +159,7 @@ const Header = () => {
                         as={Link}
                         onClick={() => setShow(false)}
                         to="/saved"
+                        className={`${pathname === "/saved" ? "active" : ""}`}
                       >
                         Saved
                       </NavDropdown.Item>
@@ -170,16 +177,16 @@ const Header = () => {
                         variant="primary"
                         size="sm "
                         onClick={handleShowLoginModal}
-                        className="bg-blue border-0 px-3 mt-sm-2 rounded-0 text-primary"
+                        className="bg-blue px-3 mt-sm-2 rounded-0 text-primary border-2 border-primary text-primary"
                       >
                         Login
                       </Button>
                     </div>
                   )}
                 </Nav>
-                <Button variant="none" className="p-0 mb-1">
-                  <Search size={20} strokeWidth={2} color="var(--theme)" />
-                </Button>
+                {/* <Button variant="none" className="p-0 mb-1">
+                  <Search size={20} strokeWidth={2} color="var(--blue)" />
+                </Button> */}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

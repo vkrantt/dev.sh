@@ -42,7 +42,7 @@ const Trending = () => {
             posts &&
             posts.map((post, index) => (
               <div key={post._id} className="d-flex align-items-top">
-                <div className="display-1 fw-bold pe-2 text-blue">
+                <div className="display-1 fw-bold pe-2 text-muted">
                   {index + 1}
                 </div>
                 <SocialCard post={post} />

@@ -8,6 +8,8 @@ import {
   updateUserById,
   deleteUserById,
   followers,
+  getAllFollowings,
+  getAllFollowers,
 } from "../controllers/user.controller.js";
 import { authguard } from "../middlewares/verifytoken.js";
 
@@ -21,5 +23,8 @@ router.route("/getUserById/:id").get(authguard, getUserById);
 router.route("/updateUser/:id").post(authguard, updateUserById);
 router.route("/deleteUser/:id").delete(authguard, deleteUserById);
 router.route("/followers").get(authguard, followers);
+
+router.route("/getFollowings").get(authguard, getAllFollowings);
+router.route("/getFollowers").get(authguard, getAllFollowers);
 
 export default router;

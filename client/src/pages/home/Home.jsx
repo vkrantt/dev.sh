@@ -28,7 +28,7 @@ const Home = () => {
     <Container>
       <Row className="d-flex flex-md-row-reverse">
         <Col lg="8" className="order-last">
-          <h1 className="display-4 fw-bold text-blue my-3">Feed</h1>
+          <h1 className="display-4 fw-bold text-primary my-3">Feed</h1>
           {/* Content for the first column */}
           {loading ? (
             <div className="">

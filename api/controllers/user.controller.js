@@ -291,3 +291,54 @@ export async function followers(req, res) {
     });
   }
 }
+
+// Get all followers
+export async function getAllFollowers(req, res) {
+  try {
+    // Find the logged-in user and populate the 'following' field to get the actual user objects
+    const loggedUser = await User.findById(req.user._id)
+      .select("firstName lastName expertise image")
+      .populate({
+        path: "followers",
+        select: "firstName lastName expertise image",
+      });
+
+    // Extract the following users
+    const followingUsers = loggedUser.followers;
+
+    res.status(200).json({
+      status: "ok",
+      response: followingUsers,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
+// Get all followers
+export async function getAllFollowings(req, res) {
+  try {
+    const loggedUser = await User.findById(req.user._id)
+      .select("firstName lastName expertise image")
+      .populate({
+        path: "following",
+        select: "firstName lastName expertise image",
+      });
+
+    // Extract the following users
+    const followingUsers = loggedUser.following;
+
+    res.status(200).json({
+      status: "ok",
+      response: followingUsers,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}

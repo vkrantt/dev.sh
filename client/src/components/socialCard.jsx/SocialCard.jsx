@@ -16,7 +16,7 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
   const [loggedInUser] = useState(getUserDetail());
   // If user is not logged in
   const [showLoginModal, setShowLoginModal] = useState(false);
-  
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
   };
 
   return (
-    <div className="card border-0 mb-4 bg-dark rounded-0 text-light w-100">
+    <div className="card border-0 mb-4 bg-light rounded-0 w-100 shadow-custom">
       {/* Render the login modal */}
       <LoginModal
         handleShow={showLoginModal}
@@ -61,39 +61,43 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
             </div>
           </div>
           <Link to={`/detail/${post._id}`}>
-            <h5 className="card-title text-blue">{post.title}</h5>
+            <h5 className="card-title text-primary">{post.title}</h5>
           </Link>
           <div className="card-text text-secondary">
             {removeHtmlTagsAndMedia(truncateText(post.description))}
           </div>
           <div className="d-flex justify-content-between mt-2">
             <div className="d-flex align-items-center">
-              <span>{formatDate(post.createdAt)} </span>{" "}
-              {/* <span className="mx-2"> · </span> */}
-              {/* <span> 8 min read</span> */}
+              <span style={{ fontSize: "12px" }}>
+                {formatDate(post.createdAt)}{" "}
+              </span>{" "}
               <span className="mx-2"> · </span>
-              <Button size="sm" className="rounded-0" variant="light">
+              <Button
+                size="sm"
+                className="border-2 rounded-0"
+                variant="outline-primary"
+              >
                 {capitalizeName(post.tag)}
               </Button>
               {pathname === "/view" && (
                 <div className="d-flex align-items-center">
                   <span className="mx-2"> · </span>
-                  <Button variant="dark" size="sm">
+                  <Button variant="none" size="sm">
                     <div
-                      className="d-flex align-items-center border-blue "
+                      className="d-flex align-items-center "
                       onClick={() => handleEdit(post)}
                     >
-                      <Edit />
+                      <Edit size={15} />
                     </div>
                   </Button>
                   <span className="mx-2"> · </span>
                   <Button
-                    variant="dark"
+                    variant="none"
                     size="sm"
                     onClick={() => handleDelete(post)}
                   >
-                    <div className="d-flex align-items-center border-blue ">
-                      <Trash />
+                    <div className="d-flex align-items-center ">
+                      <Trash size={15} />
                     </div>
                   </Button>
                 </div>

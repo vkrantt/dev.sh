@@ -9,6 +9,7 @@ import { get } from "../handlers/storage";
 import { useEffect } from "react";
 import LoginModal from "../../modals/login/Loginmodal";
 import Loader from "../loader/Loader";
+import Avatar from "react-avatar";
 
 const Usercard = ({ user, date, showFollowBtn = true }) => {
   const [loggedInUser] = useState(getUserDetail());
@@ -62,17 +63,16 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
       {/* //////////////////////////// */}
 
       <div className="d-flex align-items-center">
-        <img
-          className="rounded-circle border-3 border-blue me-4"
-          src={
-            user?.image
-              ? user?.image
-              : "http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3"
-          }
-          style={{ width: "35px", height: "35px" }}
-          alt="img"
+        <Avatar
+          round={true}
+          name={user?.firstName}
+          src={user?.image}
+          value="86%"
+          size="30"
+          className="me-3"
         />
-        <div className="">
+
+        <div>
           <div className="text-blue" style={{ fontSize: "14px" }}>
             <div>
               {capitalizeName(user?.firstName)} {capitalizeName(user?.lastName)}{" "}
@@ -81,7 +81,12 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
                 {user?.expertise ? capitalizeName(user?.expertise) : "Reading"}
               </span>
             </div>
-            <div style={{ fontSize: "12px" }}>{date}</div>
+            <div
+              className="text-secondary fw-bold"
+              style={{ fontSize: "10px" }}
+            >
+              {date}
+            </div>
           </div>
           <div className="text-secondary" style={{ fontSize: "14px" }}></div>
         </div>
@@ -91,7 +96,7 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
         <Button
           size="sm"
           onClick={() => handleFollow(user._id)}
-          className="bg-blue px-4 text-primary mx-4"
+          className="bg-blue rounded-0 px-4 text-primary mx-4"
         >
           {loading ? <Loader /> : follow ? "Following" : "Follow"}
         </Button>

@@ -132,6 +132,9 @@ const DetailPage = () => {
       setShowLoginModal(true);
       return;
     }
+    if (!newComment.comment || newComment.comment == "") {
+      return;
+    }
     setCommentLoading(true);
     axios
       .put(
@@ -236,31 +239,33 @@ const DetailPage = () => {
               </Col>
             </Row>
 
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center justify-content-between">
               <div className="d-flex align-items-center">
-                <Button variant="" className="p-0 m-0">
-                  {likeLoading ? (
-                    <Spinner variant="danger" size="sm" />
-                  ) : isLike ? (
-                    <Heart
-                      onClick={() => handleLike(post._id)}
-                      color="red"
-                      style={{ fill: "red" }}
-                    />
-                  ) : (
-                    <Heart onClick={() => handleLike(post._id)} color="red" />
-                  )}
-                </Button>
+                <div className="d-flex align-items-center">
+                  <Button variant="" className="p-0 m-0">
+                    {likeLoading ? (
+                      <Spinner variant="danger" size="sm" />
+                    ) : isLike ? (
+                      <Heart
+                        onClick={() => handleLike(post._id)}
+                        color="red"
+                        style={{ fill: "red" }}
+                      />
+                    ) : (
+                      <Heart onClick={() => handleLike(post._id)} color="red" />
+                    )}
+                  </Button>
 
-                <div className="fs-6 mx-2">{likeCount}</div>
+                  <div className="fs-6 mx-2">{likeCount}</div>
+                </div>
+
+                <div className="d-flex align-items-center mx-3">
+                  <MessageCircle color="var(--blue)" />
+                  <div className="fs-6 mx-2">{commentCount}</div>
+                </div>
               </div>
 
-              <div className="d-flex align-items-center mx-3">
-                <MessageCircle color="var(--theme)" />
-                <div className="fs-6 mx-2">{commentCount}</div>
-              </div>
-
-              <div>
+              <div className="">
                 <Button
                   size="sm"
                   variant="none"
@@ -268,13 +273,14 @@ const DetailPage = () => {
                   onClick={() => handleBookmark()}
                 >
                   {bookmark ? (
-                    <BookmarkCheck color="var(--theme)" />
+                    <BookmarkCheck color="var(--blue)" />
                   ) : (
-                    <Bookmark color="var(--theme)" />
+                    <Bookmark color="var(--blue)" />
                   )}
                 </Button>
               </div>
             </div>
+
             <hr className="text-blue" />
             <Col
               className="fs-4 custom-col-class"
@@ -289,11 +295,11 @@ const DetailPage = () => {
             {/* Comment section */}
             <hr className="text-blue" />
             <div className="my-5">
-              <h2 className="text-primary">Comment Section</h2>
-              <ListGroup className="mb-3 bg-dark">
+              <h4 className="text-primary">Comment Section</h4>
+              <ListGroup className="mb-3">
                 {comments.map((comment, index) => (
                   <ListGroup.Item
-                    className="text-light border-0 border-bottom border-1 bg-dark"
+                    className="border-0 border-bottom border-1"
                     key={index}
                   >
                     {/* <strong className="text-blue">
@@ -318,13 +324,14 @@ const DetailPage = () => {
                     as="textarea"
                     rows={12}
                     value={newComment.comment}
-                    className="bg-dark text-light border-0"
+                    className=" shadow-none border-2 rounded-0"
                     onChange={handleCommentChange}
                   />
                 </Form.Group>
                 <Button
                   variant="primary"
-                  className="mt-2 shadow-none bg-blue border-2 rounded-2 text-primary"
+                  size="sm"
+                  className="mt-2 shadow-none bg-blue border-2 rounded-0 text-primary"
                   onClick={handleAddComment}
                 >
                   {commentLoading ? <Loader /> : "Add Comment"}

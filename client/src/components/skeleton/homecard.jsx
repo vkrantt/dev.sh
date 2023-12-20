@@ -3,7 +3,7 @@ import { Placeholder } from "react-bootstrap";
 
 const Homecard = ({ count }) => {
   const placeholders = Array.from({ length: count }).map((_, index) => (
-    <div key={index} className="bg-dark mb-4 w-100 p-4 rounded-2">
+    <div key={index} className="mb-4 w-100 p-4 rounded-2">
       <Placeholder as="p" animation="glow">
         <Placeholder xs={4} />
       </Placeholder>

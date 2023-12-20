@@ -8,8 +8,6 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #161616 !important;
-  color: #eaeaea !important;
 }
 
 code {
@@ -20,7 +18,7 @@ code {
 :root {
   --theme: #d7ebfe;
   --theme2: #626ee3;
-
+  --blue: #0a58ca;
   --light: #dedede;
 }
 
@@ -29,7 +27,7 @@ code {
 }
 
 .text-blue {
-  color: var(--theme) !important;
+  color: var(--blue) !important;
 }
 
 .fade.modal.show {
@@ -42,4 +40,15 @@ code {
   -moz-border-radius: 0px !important;
   border-radius: 0px !important;
   border: 3px solid var(--theme) !important;
+}
+
+.shadow-custom {
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.11),
+    0 0.1875rem 0.4375rem rgba(0, 0, 0, 0.13);
+}
+
+.shadow-xs {
+  box-shadow: rgba(50, 71, 92, 0.2) 0px 2px 1px -1px,
+    rgba(50, 71, 92, 0.14) 0px 1px 1px 0px,
+    rgba(50, 71, 92, 0.12) 0px 1px 3px 0px;
 }
