@@ -3,6 +3,7 @@ import throwError from "../handlers/error.handler.js";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 
 // Create New User
 export async function createUser(req, res) {
@@ -229,6 +230,59 @@ export async function deleteUserById(req, res) {
     res.status(200).json({
       status: "ok",
       response: "Good Bye! Your account has been permanently deleted.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
+// Get followers
+export async function followers(req, res) {
+  try {
+    const user = await User.findById(req.user._id).select("followers -_id");
+
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User not found",
+      });
+    }
+
+    const ObjectId = mongoose.Types.ObjectId;
+
+    // Assuming followers is an array of strings in your document
+    const followerIds = user.followers;
+
+    if (!followerIds || followerIds.length === 0) {
+      return res.status(200).json({
+        status: "ok",
+        response: [], // No followers to fetch
+      });
+    }
+
+    const newUsers = await Promise.all(
+      followerIds.map(async (followerId) => {
+        const follower = await User.findById(ObjectId(followerId));
+
+        // You may want to check if follower exists
+        if (!follower) {
+          return null; // or handle it as needed
+        }
+
+        // Only include necessary information in the response
+        return {
+          _id: follower._id,
+          username: follower.username, // Add other properties if needed
+        };
+      })
+    );
+
+    res.status(200).json({
+      status: "ok",
+      response: newUsers.filter((user) => user !== null), // Filter out null values
     });
   } catch (error) {
     res.status(500).json({

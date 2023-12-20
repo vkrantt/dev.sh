@@ -37,7 +37,7 @@ export async function allPosts(req, res) {
     for (let i = 0; i < posts.length; i++) {
       const item = posts[i];
       item.createdBy = await User.findById(item.createdBy).select(
-        "-password -links "
+        "firstName lastName expertise image"
       );
     }
     res.status(200).json({
@@ -240,6 +240,73 @@ export async function trendings(req, res) {
     res.status(200).json({
       status: "ok",
       response: posts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// Save bookmark
+export async function saveBookmark(req, res) {
+  const { postId } = req.params;
+  try {
+    await Post.findByIdAndUpdate(
+      postId,
+      { $addToSet: { bookmarks: req.user._id } },
+      { new: true }
+    );
+
+    res.status(200).json({
+      status: "ok",
+      response: "Save bookmark.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// delete bookmarks
+export async function deleteBookmark(req, res) {
+  const { postId } = req.params;
+  try {
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $pull: { bookmarks: req.user._id } },
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      response: "Remove bookmark.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// Get all bookmarks
+export async function getAllBookmarks(req, res) {
+  try {
+    const bookmarkedPosts = await Post.find({ bookmarks: req.user._id });
+
+    for (let i = 0; i < bookmarkedPosts.length; i++) {
+      const item = bookmarkedPosts[i];
+      item.createdBy = await User.findById(item.createdBy).select(
+        "firstName lastName expertise image"
+      );
+    }
+
+    res.status(200).json({
+      status: "ok",
+      response: bookmarkedPosts,
     });
   } catch (error) {
     res.status(500).json({

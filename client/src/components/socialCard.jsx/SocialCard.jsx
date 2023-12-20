@@ -1,4 +1,4 @@
-import { Bookmark, BookmarkCheck, Edit, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 import React, { useState } from "react";
 import Avatar from "react-avatar";
 import { Button } from "react-bootstrap";
@@ -16,7 +16,7 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
   const [loggedInUser] = useState(getUserDetail());
   // If user is not logged in
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [bookmark, setBookmark] = useState(false);
+  
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -27,21 +27,13 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
     });
   };
 
-  // Handle bookmark
-  const handleBookmark = () => {
-    if (!loggedInUser) {
-      setShowLoginModal(true);
-      return;
-    }
-    setBookmark(!bookmark);
-  };
   // if user is not logged in
   const handleCloseLoginModal = () => {
     setShowLoginModal(false);
   };
 
   return (
-    <div className="card border-0 mb-4 bg-dark text-light w-100">
+    <div className="card border-0 mb-4 bg-dark rounded-0 text-light w-100">
       {/* Render the login modal */}
       <LoginModal
         handleShow={showLoginModal}
@@ -80,7 +72,7 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
               {/* <span className="mx-2"> · </span> */}
               {/* <span> 8 min read</span> */}
               <span className="mx-2"> · </span>
-              <Button size="sm" className="rounded-2" variant="light">
+              <Button size="sm" className="rounded-0" variant="light">
                 {capitalizeName(post.tag)}
               </Button>
               {pathname === "/view" && (
@@ -107,19 +99,6 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
                 </div>
               )}
             </div>
-
-            <Button
-              size="sm"
-              variant="none"
-              className="p-0 m-0"
-              onClick={() => handleBookmark()}
-            >
-              {bookmark ? (
-                <BookmarkCheck color="#ffffff" />
-              ) : (
-                <Bookmark color="#ffffff" />
-              )}
-            </Button>
           </div>
         </div>
       </div>

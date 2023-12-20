@@ -9,12 +9,12 @@ const LoginModal = ({ handleShow, handleClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   return (
     <>
-      <Modal show={handleShow} onHide={handleClose}>
-        <Modal.Header closeButton>
+      <Modal show={handleShow} onHide={handleClose} className="rounded-0">
+        {/* <Modal.Header closeButton>
           <Modal.Title className="fw-bold d-flex text-primary">
             <Logo /> {isLogin ? "Log In" : "Sign up"} to continue
           </Modal.Title>
-        </Modal.Header>
+        </Modal.Header> */}
         <Modal.Body>
           <>
             {isLogin ? (
@@ -29,7 +29,9 @@ const LoginModal = ({ handleShow, handleClose }) => {
                 className="text-primary"
                 onClick={() => setIsLogin(!isLogin)}
               >
-                {isLogin ? "Create account" : "Already have an account ?"}
+                {isLogin
+                  ? "don't have any account?"
+                  : "Already have an account?"}
               </Button>
             </div>
           </>

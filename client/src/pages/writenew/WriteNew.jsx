@@ -195,7 +195,7 @@ const WriteNew = () => {
                   name="title"
                   onChange={handleChange}
                   value={form.title}
-                  className=" shadow-none bg-dark text-light border-0"
+                  className=" shadow-none bg-dark text-light border-0 rounded-0"
                 />
               </Form.Group>
             </Row>
@@ -205,7 +205,7 @@ const WriteNew = () => {
               <Form.Select
                 as={Col}
                 aria-label="Default select example"
-                className=" shadow-none bg-dark text-light border-0"
+                className=" shadow-none bg-dark rounded-0 text-light border-0"
                 onChange={handleSelectTag}
                 value={form.tag}
               >
@@ -228,7 +228,6 @@ const WriteNew = () => {
 
             <ReactQuill
               ref={quillRef}
-              theme="snow"
               value={value}
               onChange={setValue}
               modules={modules}
@@ -242,6 +241,7 @@ const WriteNew = () => {
               id="custom-switch"
               label="Social share"
               className="mt-5"
+              size="lg"
               onChange={handleSocialShare}
               checked={form.shared}
             />
@@ -252,7 +252,13 @@ const WriteNew = () => {
               type="submit"
               onClick={handleSubmit}
             >
-              {loading ? <Loader /> : postId ? "Update" : "Post"}
+              {loading ? (
+                <Loader variant="light" />
+              ) : postId ? (
+                "Update"
+              ) : (
+                "Post"
+              )}
             </Button>
           </Form>
         </Col>

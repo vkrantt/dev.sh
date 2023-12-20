@@ -27,7 +27,8 @@ server.use("/api/post", posts);
 server.get("/", (req, res) => {
   res.json({
     status: "ok",
-    app: "Kienote",
+    app: "dev.sh",
+    version: "0.0.3",
   });
 });
 

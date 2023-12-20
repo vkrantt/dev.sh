@@ -15,7 +15,7 @@ const Explore = () => {
 
             <div>
               <>
-                <Tags className="fw-bold rounded-2 me-2 my-2 " />
+                <Tags className="fw-bold me-2 my-2 " />
               </>
             </div>
           </div>

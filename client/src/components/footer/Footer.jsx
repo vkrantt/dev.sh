@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <Container fluid className="">
       <Container className=" d-flex justify-content-between pt-3">
-        <p>0.0.1</p>
+        <p>0.0.3</p>
         <div className="d-flex align-items-center">
           &copy; 2023
           <span className="text-decoration-underline">

@@ -16,6 +16,8 @@ import WriteNew from "./pages/writenew/WriteNew";
 import ViewAll from "./pages/viewall/ViewAll";
 import AdminAuthguard from "./routes/AdminAuthguard";
 import SuperAdminAuthguard from "./routes/SuperAdminAuthguard";
+import Followers from "./pages/user/followers/Followers";
+import Following from "./pages/user/following/Following";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -57,6 +59,14 @@ const App = () => {
             }
           />
 
+          <Route
+            path="/user/followers"
+            element={<Authguard children={<Followers />} />}
+          />
+          <Route
+            path="/user/following"
+            element={<Authguard children={<Following />} />}
+          />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </div>

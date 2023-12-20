@@ -8,6 +8,8 @@ import { BASE_URL } from "../../config/config";
 import Loader from "../../components/loader/Loader";
 import { X } from "lucide-react";
 import { get } from "../../components/handlers/storage";
+import { Link } from "react-router-dom";
+import "./Profile.css";
 
 const Profile = () => {
   const inputRef = useRef(null);
@@ -30,7 +32,7 @@ const Profile = () => {
     confirmPassword: "",
     city: "",
     state: "",
-    image: "",
+    // image: "",
     country: "",
     gender: "",
     bio: "",
@@ -91,10 +93,10 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setForm((prevCredentials) => ({
-      ...prevCredentials,
-      image: image ? URL.createObjectURL(image) : "",
-    }));
+    // setForm((prevCredentials) => ({
+    //   ...prevCredentials,
+    //   image: image ? URL.createObjectURL(image) : "",
+    // }));
 
     const formData = form;
 
@@ -197,15 +199,27 @@ const Profile = () => {
             <div className="p-3 d-flex align-items-center text-center justify-content-between ">
               <span className="me-3">
                 <div className="text-blue">Posts</div>
-                <div className="fs-3">{posts}</div>
+                <Link to="/view" className="fs-3 profile-links fw-bold">
+                  {posts}
+                </Link>
               </span>
               <span className="mx-3">
                 <div className="text-blue">Followers</div>
-                <div className="fs-3">{follower}</div>
+                <Link
+                  to="/user/followers"
+                  className="fs-3 profile-links fw-bold"
+                >
+                  {follower}
+                </Link>
               </span>
               <span className="mx-3">
                 <div className="text-blue">Following</div>
-                <div className="fs-3">{following}</div>
+                <Link
+                  to="/user/following"
+                  className="fs-3 profile-links fw-bold"
+                >
+                  {following}
+                </Link>
               </span>
             </div>
             {/* header closed */}

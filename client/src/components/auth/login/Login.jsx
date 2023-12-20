@@ -63,7 +63,7 @@ const Login = ({ handleClose }) => {
         <Form.Control
           type="email"
           placeholder="name@example.com"
-          className="border border-2 shadow-none text-dark"
+          className="border-2 rounded-0 shadow-none text-dark"
           name="email"
           onChange={handleChange}
           value={credentials.email}
@@ -78,7 +78,7 @@ const Login = ({ handleClose }) => {
           <Form.Control
             type={show ? "text" : "password"}
             placeholder="Password"
-            className="border border-2 shadow-none text-dark"
+            className="border-2 rounded-0 shadow-none text-dark"
             name="password"
             onChange={handleChange}
             value={credentials.password}
@@ -95,7 +95,7 @@ const Login = ({ handleClose }) => {
       <div className="mt-3">
         <Button
           variant="primary"
-          className="w-100 bg-blue border-2 rounded-2 text-primary"
+          className="w-100 bg-blue border-2 rounded-0 text-primary"
           onClick={handleSubmit}
           type="submit"
         >

@@ -9,6 +9,9 @@ import {
   updatePost,
   deletePost,
   trendings,
+  saveBookmark,
+  deleteBookmark,
+  getAllBookmarks,
 } from "../controllers/post.controller.js";
 import { authguard } from "../middlewares/verifytoken.js";
 
@@ -24,4 +27,8 @@ router.route("/updatePost/:id").post(authguard, updatePost);
 router.route("/deletePost/:id").delete(authguard, deletePost);
 router.route("/trendings").get(trendings);
 
+// Bookmarks
+router.route("/save-bookmark/:postId").post(authguard, saveBookmark);
+router.route("/delete-bookmark/:postId").delete(authguard, deleteBookmark);
+router.route("/bookmarks").get(authguard, getAllBookmarks);
 export default router;

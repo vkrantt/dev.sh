@@ -17,7 +17,7 @@ import Loader from "../../components/loader/Loader";
 import { formatDate } from "../../utils/utility";
 import Usercard from "../../components/userCard/Usercard";
 import "./DetailPage.css";
-import { Heart, MessageCircle } from "lucide-react";
+import { Heart, MessageCircle, Bookmark, BookmarkCheck } from "lucide-react";
 import { get } from "../../components/handlers/storage";
 import { getUserDetail } from "../../services/user";
 import LoginModal from "../../modals/login/Loginmodal";
@@ -34,7 +34,7 @@ const DetailPage = () => {
   let [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   const [likeLoading, setLikeLoading] = useState(false);
-
+  const [bookmark, setBookmark] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({
     comment: "",
@@ -65,6 +65,11 @@ const DetailPage = () => {
         // Check if comments already added
         setComments(response.data.response?.comments);
         setCommentCount(response.data.response?.comments?.length);
+
+        // check is post saved bookmark
+        setBookmark(
+          response.data.response?.bookmarks?.includes(loggedInUser?.id)
+        );
 
         setFormattedDescription(
           response.data.response.description.replace(/\n/g, "<br />")
@@ -165,6 +170,43 @@ const DetailPage = () => {
     setShowLoginModal(false);
   };
 
+  // Handle bookmark
+  const handleBookmark = () => {
+    if (!loggedInUser) {
+      setShowLoginModal(true);
+      return;
+    }
+    console.log("bookmark", bookmark);
+    if (bookmark) {
+      axios
+        .delete(`${BASE_URL}/post/delete-bookmark/${params.id}`, {
+          headers: {
+            Authorization: `Bearer ${get("dsh_token")}`,
+          },
+        })
+        .then((response) => {
+          alert(response.data.response);
+        })
+        .catch((error) => {});
+    } else {
+      axios
+        .post(
+          `${BASE_URL}/post/save-bookmark/${params.id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${get("dsh_token")}`,
+            },
+          }
+        )
+        .then((response) => {
+          alert(response.data.response);
+        })
+        .catch((error) => {});
+    }
+    setBookmark(!bookmark);
+  };
+
   return (
     <Container>
       {/* Render the login modal */}
@@ -216,6 +258,21 @@ const DetailPage = () => {
               <div className="d-flex align-items-center mx-3">
                 <MessageCircle color="var(--theme)" />
                 <div className="fs-6 mx-2">{commentCount}</div>
+              </div>
+
+              <div>
+                <Button
+                  size="sm"
+                  variant="none"
+                  className="p-0 m-0"
+                  onClick={() => handleBookmark()}
+                >
+                  {bookmark ? (
+                    <BookmarkCheck color="var(--theme)" />
+                  ) : (
+                    <Bookmark color="var(--theme)" />
+                  )}
+                </Button>
               </div>
             </div>
             <hr className="text-blue" />

@@ -42,7 +42,7 @@ const Header = () => {
         <Navbar variant="dark" key="lg" expand="lg" className="bg-dark">
           <Container fluid>
             <Navbar.Brand as={Link} to="/">
-              <Logo />
+              <Logo show={true} />
             </Navbar.Brand>
             <Navbar.Toggle
               onClick={() => setShow(!show)}
@@ -65,7 +65,7 @@ const Header = () => {
                   id="offcanvasNavbarLabel-expand-lg"
                   className="d-flex align-items-center"
                 >
-                  <Logo />
+                  <Logo show={true} />
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body className="bg-dark text-light">
@@ -170,7 +170,7 @@ const Header = () => {
                         variant="primary"
                         size="sm "
                         onClick={handleShowLoginModal}
-                        className="bg-blue border-2 px-3 mt-sm-2 rounded-2 text-primary"
+                        className="bg-blue border-0 px-3 mt-sm-2 rounded-0 text-primary"
                       >
                         Login
                       </Button>
