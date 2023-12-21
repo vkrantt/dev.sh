@@ -10,7 +10,9 @@
   color: #abb2bf;
   padding: 1em;
   overflow-x: auto;
-  border-radius: 5px;
+  box-shadow: 0 10px 20px -5px #000;
+  font-size: 14px;
+  white-space: pre-wrap; /* Add this line to allow text to wrap */
 }
 
 .custom-col-class pre code {
