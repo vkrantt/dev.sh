@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import SocialCard from "../../components/socialCard.jsx/SocialCard";
 import { useEffect } from "react";
 import axios from "axios";
@@ -11,18 +11,31 @@ import Tags from "../../components/tags/Tags";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
+  let [page, setPage] = useState(1);
+  const [itemsRequired] = useState(10);
+  const [totalPostsCount, setTotalPostsCount] = useState(0);
+
+  const loadPosts = () => {
     setLoading(true);
     axios
-      .get(`${BASE_URL}/post`)
+      .get(`${BASE_URL}/post?page=${page}&pageSize=${itemsRequired}`)
       .then((response) => {
-        setPosts(response.data.response);
+        setPosts([...posts, ...response.data.response.posts]);
+        setTotalPostsCount(response.data.response.totalCount);
         setLoading(false);
       })
       .catch(() => {
         setLoading(false);
       });
-  }, []);
+  };
+  useEffect(() => {
+    loadPosts();
+  }, [page]);
+
+  const handleLoadMore = () => {
+    setPage(++page);
+    loadPosts();
+  };
 
   return (
     <Container>
@@ -30,17 +43,36 @@ const Home = () => {
         <Col lg="8" className="order-last">
           <h1 className="display-4 fw-bold text-primary my-3">Feed</h1>
           {/* Content for the first column */}
-          {loading ? (
-            <div className="">
-              <Homecard count="5" />
-            </div>
-          ) : (
-            posts &&
+
+          {posts &&
             posts.map((post) => (
               <div key={post._id}>
                 <SocialCard post={post} />
               </div>
-            ))
+            ))}
+
+          {loading && (
+            <div className="">
+              <Homecard count="3" />
+            </div>
+          )}
+
+          <div className="mb-2">
+            Showing:
+            <b>
+              1-{posts.length}/{totalPostsCount}
+            </b>
+          </div>
+
+          {totalPostsCount != posts.length && !loading && (
+            <div className=" mb-5 d-flex justify-content-center">
+              <Button
+                onClick={() => handleLoadMore()}
+                className="bg-blue px-3 mt-sm-2 rounded-0 text-primary border-2 border-primary text-primary"
+              >
+                Show More
+              </Button>
+            </div>
           )}
         </Col>
 

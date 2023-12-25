@@ -32,17 +32,32 @@ export async function createPost(req, res) {
 // Get all posts
 export async function allPosts(req, res) {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+
     const query = { shared: true, isDeleted: false };
-    const posts = await Post.find(query).sort({ createdAt: -1 });
+
+    const [posts, totalCount] = await Promise.all([
+      Post.find(query).sort({ createdAt: -1 }).skip(skip).limit(pageSize),
+      Post.countDocuments(query),
+    ]);
+
     for (let i = 0; i < posts.length; i++) {
       const item = posts[i];
       item.createdBy = await User.findById(item.createdBy).select(
         "firstName lastName expertise image"
       );
     }
+
     res.status(200).json({
       status: 200,
-      response: posts,
+      response: {
+        posts,
+        totalCount,
+        page,
+        pageSize,
+      },
     });
   } catch (error) {
     res.status(500).json({
