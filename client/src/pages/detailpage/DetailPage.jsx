@@ -120,7 +120,7 @@ const DetailPage = () => {
       comment: e.target.value,
       user: {
         image: loggedInUser?.image,
-        createdAt: date.toISOString(),
+        createdAt: date,
         firstName: loggedInUser?.firstName,
         lastName: loggedInUser?.lastName,
       },
@@ -312,7 +312,15 @@ const DetailPage = () => {
                       showFollowBtn={false}
                     />
 
-                    <div className="mx-5 px-2 my-3">{comment?.comment}</div>
+                    <div
+                      className=" my-3"
+                      dangerouslySetInnerHTML={{
+                        __html: comment?.comment,
+                      }}
+                      style={{
+                        whiteSpace: "pre-line",
+                      }}
+                    ></div>
                   </ListGroup.Item>
                 ))}
               </ListGroup>

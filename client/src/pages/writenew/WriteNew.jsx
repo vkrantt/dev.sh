@@ -134,7 +134,6 @@ const WriteNew = () => {
     fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
     fontSize: "18px",
-    height: "800px",
   };
 
   const checkForUpdate = (id) => {
@@ -149,6 +148,11 @@ const WriteNew = () => {
     e.preventDefault();
     const editorContent = quillRef.current.value;
     form.description = editorContent;
+
+    if (!form.title || !form.description || !form.tag) {
+      alert("Please fill all the fields");
+      return;
+    }
     setLoading(true);
     const url = checkForUpdate(postFromId?._id);
     axios
@@ -184,7 +188,7 @@ const WriteNew = () => {
           <Form>
             <Row className="mb-3">
               <h1 className="display-4 fw-bold text-blue my-3">
-                Create and share
+                Write and share
               </h1>
             </Row>
             <Row className="mb-3">
@@ -200,61 +204,66 @@ const WriteNew = () => {
               </Form.Group>
             </Row>
 
-            <Row className="mb-3 mx-0">
+            <div>
               <Form.Label>Tags</Form.Label>
-              <Form.Select
-                as={Col}
-                aria-label="Default select example"
-                className=" shadow-none rounded-0 border-2"
-                onChange={handleSelectTag}
-                value={form.tag}
-              >
-                <option>Select Tag</option>
-                <option value="programming">Programming</option>
-                <option value="data science">Data science</option>
-                <option value="Technology">Technology</option>
-                <option value="machine learning">Machine Learning</option>
-                <option value="productivity">Productivity</option>
-                <option value="health">Health</option>
-                <option value="education">Education</option>
-                <option value="social">Social</option>
-                <option value="business">Business</option>
-                <option value="marketing">Marketing</option>
-                <option value="relationships">Relationships</option>
-                <option value="world">World</option>
-                <option value="others">Others</option>
-              </Form.Select>
-            </Row>
+              <Row className="mb-3 mx-0">
+                <Form.Select
+                  as={Col}
+                  aria-label="Default select example"
+                  className=" shadow-none rounded-0 border-2"
+                  onChange={handleSelectTag}
+                  value={form.tag}
+                >
+                  <option>Select Tag</option>
+                  <option value="programming">Programming</option>
+                  <option value="data science">Data science</option>
+                  <option value="Technology">Technology</option>
+                  <option value="machine learning">Machine Learning</option>
+                  <option value="productivity">Productivity</option>
+                  <option value="health">Health</option>
+                  <option value="education">Education</option>
+                  <option value="social">Social</option>
+                  <option value="business">Business</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="relationships">Relationships</option>
+                  <option value="world">World</option>
+                  <option value="others">Others</option>
+                </Form.Select>
+              </Row>
+            </div>
 
-            <ReactQuill
-              ref={quillRef}
-              value={value}
-              theme="snow"
-              onChange={setValue}
-              modules={modules}
-              formats={formats}
-              style={editorStyle}
-              className="shadow-none border-2"
-            />
+            <div>
+              <Form.Label>Description</Form.Label>
+              <ReactQuill
+                ref={quillRef}
+                value={value}
+                theme="snow"
+                onChange={setValue}
+                modules={modules}
+                formats={formats}
+                style={editorStyle}
+                className="shadow-none border-2"
+              />
+            </div>
 
             <Form.Check
               type="switch"
               id="custom-switch"
               label="Share publicly"
-              className="mt-5"
-              size="lg"
+              className="mt-3 fs-4"
               onChange={handleSocialShare}
               checked={form.shared}
+              style={{ zIndex: 10 }}
             />
 
             <Button
               variant="outline-primary"
-              className=" rounded-0 border-2 px-4 mt-4"
+              className="rounded-0 border-2 px-4 mt-3"
               type="submit"
               onClick={handleSubmit}
               disabled={!form.title}
             >
-              {loading ? <Loader /> : postId ? "Update" : "Post"}
+              {loading ? <Loader /> : postId ? "Edit Post" : "Write Post"}
             </Button>
           </Form>
         </Col>
