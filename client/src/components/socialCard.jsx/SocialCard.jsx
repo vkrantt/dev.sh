@@ -112,7 +112,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                   </Button>
                 </div>
               )}
-              {pathname === "/featured" && (
+              {pathname === "/featured" && handleDelete && (
                 <Button
                   variant="none"
                   size="sm"

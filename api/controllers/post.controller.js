@@ -364,10 +364,10 @@ export async function searchPost(req, res) {
         {
           $or: [
             { title: { $regex: query, $options: "i" } }, // Case-insensitive title search
-            { content: { $regex: query, $options: "i" } }, // Case-insensitive content search
+            { description: { $regex: query, $options: "i" } }, // Case-insensitive content search
           ],
         },
-        { shared: true, isDeleted: false, featured: true },
+        { shared: true, isDeleted: false },
       ],
     }).limit(10);
     for (let i = 0; i < searchResults.length; i++) {
@@ -399,6 +399,9 @@ export async function addFeaturedPost(req, res) {
       { new: true } // Return the updated document
     );
 
+    updatedPost.createdBy = await User.findById(updatedPost.createdBy).select(
+      "firstName lastName expertise image"
+    );
     if (!updatedPost) {
       return res.status(404).json({ error: "Post not found" });
     }

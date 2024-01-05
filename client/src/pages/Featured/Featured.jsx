@@ -62,15 +62,11 @@ const Featured = () => {
         }
       )
       .then(function (response) {
-        if (response.data.status === 200) {
-          setFeaturedPosts((prevFeaturedUsers) => [
-            ...prevFeaturedUsers,
-            response.data.response,
-          ]);
-          alert("Added");
-        } else {
-          alert("An error occured");
-        }
+        setFeaturedPosts((prevFeaturedUsers) => [
+          ...prevFeaturedUsers,
+          response.data.response,
+        ]);
+        alert("Added");
       });
   };
 
@@ -126,20 +122,21 @@ const Featured = () => {
             </Form.Group>
 
             {searchTerm && (
-              <div className="bg-light shadow-sm p-2">
-                <div className="text-center">{loading && <Loader />}</div>
+              <div className="bg-primary shadow-custom text-light p-2">
+                <div className="text-center">
+                  {loading && <Loader variant="light" />}
+                </div>
                 <div>
                   {!loading &&
                     posts?.length > 0 &&
                     posts?.map((post, i) => (
-                      <h6
+                      <div
                         onClick={() => handleCreateFeatureAccount(post._id)}
                         key={post._id}
-                        className="mb-2 bg-white p-2"
                         style={{ cursor: "pointer" }}
                       >
                         <SocialCard post={post} />
-                      </h6>
+                      </div>
                     ))}
 
                   {!loading && posts?.length <= 0 && (

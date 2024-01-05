@@ -11,6 +11,7 @@ import Tags from "../../components/tags/Tags";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [featuredLoading, setFeaturedLoading] = useState(false);
   let [page, setPage] = useState(1);
   const [itemsRequired] = useState(10);
   const [totalPostsCount, setTotalPostsCount] = useState(0);
@@ -40,6 +41,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    setFeaturedLoading(true);
     axios
       .get(`${BASE_URL}/post/featured`, {
         headers: {
@@ -48,6 +50,7 @@ const Home = () => {
       })
       .then((data) => {
         setFeatured(data.data.response);
+        setFeaturedLoading(false);
       });
   }, []);
 
@@ -110,7 +113,7 @@ const Home = () => {
                     </div>
                   ))}
 
-                {loading && <Homecard count="2" />}
+                {featuredLoading && <Homecard count="2" />}
               </>
             </div>
           </div>
