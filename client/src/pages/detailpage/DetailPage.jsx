@@ -120,7 +120,7 @@ const DetailPage = () => {
       comment: e.target.value,
       user: {
         image: loggedInUser?.image,
-        createdAt: date.toDateString(),
+        createdAt: date.toISOString(),
         firstName: loggedInUser?.firstName,
         lastName: loggedInUser?.lastName,
       },
@@ -179,7 +179,6 @@ const DetailPage = () => {
       setShowLoginModal(true);
       return;
     }
-    console.log("bookmark", bookmark);
     if (bookmark) {
       axios
         .delete(`${BASE_URL}/post/delete-bookmark/${params.id}`, {

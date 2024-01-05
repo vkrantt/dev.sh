@@ -330,3 +330,110 @@ export async function getAllBookmarks(req, res) {
     });
   }
 }
+
+// get all featured post
+export async function getAllFeaturedPost(req, res) {
+  try {
+    const query = { shared: true, isDeleted: false, featured: true };
+    const featuredPosts = await Post.find(query);
+    for (let i = 0; i < featuredPosts.length; i++) {
+      const item = featuredPosts[i];
+      item.createdBy = await User.findById(item.createdBy).select(
+        "firstName lastName expertise image"
+      );
+    }
+
+    res.status(200).json({
+      status: "ok",
+      response: featuredPosts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// to search post
+export async function searchPost(req, res) {
+  const { query } = req.query;
+  try {
+    const searchResults = await Post.find({
+      $and: [
+        {
+          $or: [
+            { title: { $regex: query, $options: "i" } }, // Case-insensitive title search
+            { content: { $regex: query, $options: "i" } }, // Case-insensitive content search
+          ],
+        },
+        { shared: true, isDeleted: false, featured: true },
+      ],
+    }).limit(10);
+    for (let i = 0; i < searchResults.length; i++) {
+      const item = searchResults[i];
+      item.createdBy = await User.findById(item.createdBy).select(
+        "firstName lastName expertise image"
+      );
+    }
+
+    res.status(200).json({
+      status: "ok",
+      response: searchResults,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// add featured post
+export async function addFeaturedPost(req, res) {
+  const postId = req.params.id;
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      { $set: { featured: true } },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedPost) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    res.status(200).json({
+      status: "ok",
+      response: updatedPost,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// remove featured post
+export async function deleteFeaturedPost(req, res) {
+  const postId = req.params.id;
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      { $unset: { featured: 1 } },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedPost) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    res.json(updatedPost);
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}

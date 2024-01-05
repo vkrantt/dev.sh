@@ -52,3 +52,10 @@ code {
     rgba(50, 71, 92, 0.14) 0px 1px 1px 0px,
     rgba(50, 71, 92, 0.12) 0px 1px 3px 0px;
 }
+
+.fs-sm {
+  font-size: 10px !important;
+}
+.fs-md {
+  font-size: 13px !important;
+}

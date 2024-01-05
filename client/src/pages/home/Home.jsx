@@ -15,6 +15,8 @@ const Home = () => {
   const [itemsRequired] = useState(10);
   const [totalPostsCount, setTotalPostsCount] = useState(0);
 
+  const [featured, setFeatured] = useState([]);
+
   const loadPosts = () => {
     setLoading(true);
     axios
@@ -36,6 +38,18 @@ const Home = () => {
     setPage(++page);
     loadPosts();
   };
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/post/featured`, {
+        headers: {
+          "Content-Type": "application/type",
+        },
+      })
+      .then((data) => {
+        setFeatured(data.data.response);
+      });
+  }, []);
 
   return (
     <Container>
@@ -79,10 +93,26 @@ const Home = () => {
         <Col lg="4" className="position-relative order-first">
           {/* Content for the second column */}
           <div className="top-0 end-0 position-sticky pt-3">
-            <h5>Discover more of what matters to you</h5>
+            <h3 className="fw-bold text-primary">
+              Discover more of what matters to you
+            </h3>
             <>
               <Tags />
             </>
+
+            <div className=" mt-3 ">
+              <h3 className="fw-bold text-primary">Featured</h3>
+              <>
+                {featured &&
+                  featured.map((post) => (
+                    <div key={post._id}>
+                      <SocialCard featured={true} post={post} />
+                    </div>
+                  ))}
+
+                {loading && <Homecard count="2" />}
+              </>
+            </div>
           </div>
         </Col>
       </Row>

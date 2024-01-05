@@ -12,6 +12,10 @@ import {
   saveBookmark,
   deleteBookmark,
   getAllBookmarks,
+  getAllFeaturedPost,
+  searchPost,
+  addFeaturedPost,
+  deleteFeaturedPost,
 } from "../controllers/post.controller.js";
 import { authguard } from "../middlewares/verifytoken.js";
 
@@ -31,4 +35,10 @@ router.route("/trendings").get(trendings);
 router.route("/save-bookmark/:postId").post(authguard, saveBookmark);
 router.route("/delete-bookmark/:postId").delete(authguard, deleteBookmark);
 router.route("/bookmarks").get(authguard, getAllBookmarks);
+
+// featured
+router.route("/featured").get(getAllFeaturedPost);
+router.route("/searchPosts").get(searchPost);
+router.route("/addFeatured/:id").post(authguard, addFeaturedPost);
+router.route("/deleteFeatured/:id").delete(authguard, deleteFeaturedPost);
 export default router;

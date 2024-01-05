@@ -12,7 +12,7 @@ import {
 import { getUserDetail } from "../../services/user";
 import LoginModal from "../../modals/login/Loginmodal";
 
-const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
+const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
   const [loggedInUser] = useState(getUserDetail());
   // If user is not logged in
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -61,11 +61,19 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
             </div>
           </div>
           <Link to={`/detail/${post._id}`}>
-            <h5 className="card-title text-primary">{post.title}</h5>
+            <h6
+              className={`card-title text-primary ${
+                featured ? "fs-md" : "fs-5"
+              }`}
+            >
+              {post.title}
+            </h6>
           </Link>
-          <div className="card-text text-secondary">
-            {removeHtmlTagsAndMedia(truncateText(post.description))}
-          </div>
+          {!featured && (
+            <div className="card-text text-secondary">
+              {removeHtmlTagsAndMedia(truncateText(post.description))}
+            </div>
+          )}
           <div className="d-flex justify-content-between mt-2">
             <div className="d-flex align-items-center">
               <span style={{ fontSize: "12px" }}>
@@ -74,7 +82,9 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
               <span className="mx-2"> · </span>
               <Button
                 size="sm"
-                className="border-2 rounded-0"
+                className={` rounded-0 ${
+                  featured ? "fs-sm border-1 p-0 px-1" : "border-2"
+                }`}
                 variant="outline-primary"
               >
                 {capitalizeName(post.tag)}
@@ -101,6 +111,17 @@ const SocialCard = ({ post, handleDelete, isDeleteLoading }) => {
                     </div>
                   </Button>
                 </div>
+              )}
+              {pathname === "/featured" && (
+                <Button
+                  variant="none"
+                  size="sm"
+                  onClick={() => handleDelete(post)}
+                >
+                  <div className="d-flex align-items-center ">
+                    <Trash size={15} />
+                  </div>
+                </Button>
               )}
             </div>
           </div>

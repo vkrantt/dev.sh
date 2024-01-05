@@ -13,6 +13,9 @@ const postShchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    featured: {
+      type: Boolean,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

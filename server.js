@@ -28,7 +28,7 @@ server.get("/", (req, res) => {
   res.json({
     status: "ok",
     app: "dev.sh",
-    version: "0.0.3",
+    version: "0.0.5",
   });
 });
 
