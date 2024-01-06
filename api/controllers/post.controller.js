@@ -276,7 +276,7 @@ export async function saveBookmark(req, res) {
 
     res.status(200).json({
       status: "ok",
-      response: "Save bookmark.",
+      response: "Bookmark saved.",
     });
   } catch (error) {
     res.status(500).json({
@@ -297,7 +297,7 @@ export async function deleteBookmark(req, res) {
     );
     res.status(200).json({
       status: "ok",
-      response: "Remove bookmark.",
+      response: "Bookmark removed.",
     });
   } catch (error) {
     res.status(500).json({
@@ -433,6 +433,66 @@ export async function deleteFeaturedPost(req, res) {
     }
 
     res.json(updatedPost);
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// Filter out the posts
+export async function getFilteredPostsByTag(req, res) {
+  const { tags } = req.query;
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 1;
+
+  if (!tags) {
+    return res.status(400).json({ error: "Tags parameter is required" });
+  }
+
+  const tagsArray = tags.split(",");
+  try {
+    const totalCount = await Post.countDocuments({
+      $and: [{ tag: { $in: tagsArray } }, { shared: true, isDeleted: false }],
+    });
+
+    const totalPages = Math.ceil(totalCount / pageSize);
+    const currentPage = Math.min(Math.max(1, parseInt(page, 10)), totalPages);
+
+    let filteredPosts;
+
+    if (totalCount > 0) {
+      const skip = (currentPage - 1) * pageSize;
+      filteredPosts = await Post.find({
+        $and: [{ tag: { $in: tagsArray } }, { shared: true, isDeleted: false }],
+      })
+        .skip(skip)
+        .limit(pageSize);
+
+      if (filteredPosts.length > 0) {
+        for (let i = 0; i < filteredPosts.length; i++) {
+          const item = filteredPosts[i];
+          if (item.createdBy) {
+            item.createdBy = await User.findById(item.createdBy).select(
+              "firstName lastName expertise image"
+            );
+          }
+        }
+      }
+    } else {
+      filteredPosts = [];
+    }
+
+    res.status(200).json({
+      status: "ok",
+      response: {
+        posts: filteredPosts,
+        totalCount,
+        page,
+        pageSize,
+      },
+    });
   } catch (error) {
     res.status(500).json({
       status: "Server error",

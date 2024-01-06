@@ -21,11 +21,14 @@ import { Heart, MessageCircle, Bookmark, BookmarkCheck } from "lucide-react";
 import { get } from "../../components/handlers/storage";
 import { getUserDetail } from "../../services/user";
 import LoginModal from "../../modals/login/Loginmodal";
+import Alertmodal from "../../modals/alert/Alertmodal";
 
 const DetailPage = () => {
   const [loggedInUser] = useState(getUserDetail());
   // If user is not logged in
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const params = useParams();
   const [post, setPost] = useState({});
@@ -149,6 +152,8 @@ const DetailPage = () => {
       .then(function (response) {
         setCommentCount(++commentCount);
         setCommentLoading(false);
+        setShowAlertModal(true);
+        setAlertMessage("Your comment has been added.");
       })
       .catch(function () {
         setCommentLoading(false);
@@ -187,7 +192,8 @@ const DetailPage = () => {
           },
         })
         .then((response) => {
-          alert(response.data.response);
+          setShowAlertModal(true);
+          setAlertMessage(response.data.response);
         })
         .catch((error) => {});
     } else {
@@ -202,7 +208,8 @@ const DetailPage = () => {
           }
         )
         .then((response) => {
-          alert(response.data.response);
+          setShowAlertModal(true);
+          setAlertMessage(response.data.response);
         })
         .catch((error) => {});
     }
@@ -218,9 +225,16 @@ const DetailPage = () => {
       ></LoginModal>
       {/* //////////////////////////// */}
 
+      {/* Render alert modal */}
+      <Alertmodal
+        message={alertMessage}
+        handleShow={showAlertModal}
+        setShowAlertModal={setShowAlertModal}
+      ></Alertmodal>
+
       {loading ? (
-        <center>
-          <Loader />
+        <center className="mt-5">
+          <Loader size="lg" />
         </center>
       ) : (
         <Row>

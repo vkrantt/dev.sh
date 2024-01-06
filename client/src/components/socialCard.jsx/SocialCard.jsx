@@ -33,7 +33,11 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
   };
 
   return (
-    <div className="card border-0 mb-4 bg-light rounded-0 w-100 shadow-custom">
+    <div
+      className={`card border mb-4 bg-light rounded-0 w-100 shadow-custom ${
+        featured ? "border border-1 border-primary" : ""
+      }`}
+    >
       {/* Render the login modal */}
       <LoginModal
         handleShow={showLoginModal}

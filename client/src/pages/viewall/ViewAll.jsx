@@ -7,11 +7,14 @@ import { BASE_URL } from "../../config/config";
 import { useState } from "react";
 import { get } from "../../components/handlers/storage";
 import Homecard from "../../components/skeleton/homecard";
+import Alertmodal from "../../modals/alert/Alertmodal";
 
 const ViewAll = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -44,7 +47,8 @@ const ViewAll = () => {
           },
         })
         .then((data) => {
-          alert(data.data.response);
+          setShowAlertModal(true);
+          setAlertMessage(data.data.response);
           setIsDeleteLoading(false);
         });
     }
@@ -52,6 +56,13 @@ const ViewAll = () => {
 
   return (
     <Container>
+      {/* Render alert modal */}
+      <Alertmodal
+        message={alertMessage}
+        handleShow={showAlertModal}
+        setShowAlertModal={setShowAlertModal}
+      ></Alertmodal>
+
       <h1 className="display-4 fw-bold text-blue my-3">View</h1>
       {loading ? (
         <div className=" my-5">

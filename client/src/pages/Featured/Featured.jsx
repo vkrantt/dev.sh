@@ -8,6 +8,7 @@ import Loader from "../../components/loader/Loader";
 import SocialCard from "../../components/socialCard.jsx/SocialCard";
 import Homecard from "../../components/skeleton/homecard";
 import { get } from "../../components/handlers/storage";
+import Alertmodal from "../../modals/alert/Alertmodal";
 
 const Featured = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +16,9 @@ const Featured = () => {
   const [featuredPosts, setFeaturedPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     if (!searchTerm) setPosts([]);
@@ -66,7 +70,8 @@ const Featured = () => {
           ...prevFeaturedUsers,
           response.data.response,
         ]);
-        alert("Added");
+        setShowAlertModal(true);
+        setAlertMessage("Added to show as featured.");
       });
   };
 
@@ -79,7 +84,8 @@ const Featured = () => {
         },
       })
       .then((response) => {
-        alert("Removed");
+        setShowAlertModal(true);
+        setAlertMessage("Removed from featured.");
       })
       .catch((error) => {
         console.error("Error deleting post:", error);
@@ -102,6 +108,13 @@ const Featured = () => {
 
   return (
     <Container>
+      {/* Render alert modal */}
+      <Alertmodal
+        message={alertMessage}
+        handleShow={showAlertModal}
+        setShowAlertModal={setShowAlertModal}
+      ></Alertmodal>
+
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
           <span className="text-primary">

@@ -16,6 +16,7 @@ import {
   searchPost,
   addFeaturedPost,
   deleteFeaturedPost,
+  getFilteredPostsByTag,
 } from "../controllers/post.controller.js";
 import { authguard } from "../middlewares/verifytoken.js";
 
@@ -41,4 +42,8 @@ router.route("/featured").get(getAllFeaturedPost);
 router.route("/searchPosts").get(searchPost);
 router.route("/addFeatured/:id").post(authguard, addFeaturedPost);
 router.route("/deleteFeatured/:id").delete(authguard, deleteFeaturedPost);
+
+// explore
+router.route("/explore").get(getFilteredPostsByTag);
+
 export default router;

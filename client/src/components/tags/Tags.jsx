@@ -1,87 +1,22 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { tags } from "../json/tags";
 
 const Tags = ({ className }) => {
   return (
     <>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Programming
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Data science
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Technology
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Machine Learning
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Productivity
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Health
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Education
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Social
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Business
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Marketing
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Relationships
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        World
-      </Button>
-      <Button
-        className={`rounded-0 me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
-        variant="light"
-      >
-        Others
-      </Button>
+      {tags.map((tag) => (
+        <Button
+          as={Link}
+          key={tag.key}
+          to={`/explore?q=${tag.value}`}
+          className={`rounded-0  p-2 tagsLink me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
+          variant="light"
+        >
+          {tag.key}
+        </Button>
+      ))}
     </>
   );
 };

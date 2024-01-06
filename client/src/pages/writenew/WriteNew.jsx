@@ -10,11 +10,17 @@ import axios from "axios";
 import { get } from "../../components/handlers/storage";
 import { useEffect } from "react";
 import Loader from "../../components/loader/Loader";
+import Alertmodal from "../../modals/alert/Alertmodal";
+import { tags } from "../../components/json/tags";
+import { Key } from "lucide-react";
 
 const WriteNew = () => {
   const [searchParams] = useSearchParams();
   const postId = searchParams.get("id");
   const navigate = useNavigate();
+
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
@@ -150,7 +156,8 @@ const WriteNew = () => {
     form.description = editorContent;
 
     if (!form.title || !form.description || !form.tag) {
-      alert("Please fill all the fields");
+      setShowAlertModal(true);
+      setAlertMessage("Please fill all the fields");
       return;
     }
     setLoading(true);
@@ -183,6 +190,13 @@ const WriteNew = () => {
 
   return (
     <Container>
+      {/* Render alert modal */}
+      <Alertmodal
+        message={alertMessage}
+        handleShow={showAlertModal}
+        setShowAlertModal={setShowAlertModal}
+      ></Alertmodal>
+
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
           <Form>
@@ -215,19 +229,11 @@ const WriteNew = () => {
                   value={form.tag}
                 >
                   <option>Select Tag</option>
-                  <option value="programming">Programming</option>
-                  <option value="data science">Data science</option>
-                  <option value="Technology">Technology</option>
-                  <option value="machine learning">Machine Learning</option>
-                  <option value="productivity">Productivity</option>
-                  <option value="health">Health</option>
-                  <option value="education">Education</option>
-                  <option value="social">Social</option>
-                  <option value="business">Business</option>
-                  <option value="marketing">Marketing</option>
-                  <option value="relationships">Relationships</option>
-                  <option value="world">World</option>
-                  <option value="others">Others</option>
+                  {tags.map((tag) => (
+                    <option key={tag.key} value={tag.value}>
+                      {tag.key}
+                    </option>
+                  ))}
                 </Form.Select>
               </Row>
             </div>

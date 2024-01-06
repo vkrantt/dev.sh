@@ -36,10 +36,7 @@ code {
 }
 
 .modal-content {
-  -webkit-border-radius: 0px !important;
-  -moz-border-radius: 0px !important;
-  border-radius: 0px !important;
-  border: 3px solid var(--theme) !important;
+  border: 0 !important;
 }
 
 .shadow-custom {
@@ -58,4 +55,9 @@ code {
 }
 .fs-md {
   font-size: 13px !important;
+}
+
+.tagsLink {
+  text-decoration: none;
+  color: #000;
 }

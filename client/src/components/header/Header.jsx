@@ -15,6 +15,7 @@ import LoginModal from "../../modals/login/Loginmodal";
 import { get, remove } from "../handlers/storage";
 import { useState } from "react";
 import { getUserDetail } from "../../services/user";
+import Avatar from "react-avatar";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -105,7 +106,16 @@ const Header = () => {
 
                   {token ? (
                     <NavDropdown
-                      title="More"
+                      title={
+                        <Avatar
+                          round={true}
+                          name={user?.firstName}
+                          src={user?.image}
+                          value="86%"
+                          size="30"
+                          className=""
+                        />
+                      }
                       id={`offcanvasNavbarDropdown-expand-lg`}
                     >
                       {user?.isAdmin || user?.isSuperAdmin ? (
