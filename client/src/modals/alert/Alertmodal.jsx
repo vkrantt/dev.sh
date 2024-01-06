@@ -7,14 +7,13 @@ const Alertmodal = ({ handleShow, message, setShowAlertModal }) => {
   };
   return (
     <>
-      <Modal centered show={handleShow} onHide={handleClose}>
-        <Modal.Body className="bg-blue rounded-1">
+      <Modal size="sm" centered show={handleShow} onHide={handleClose}>
+        <Modal.Body className="bg-blue rounded-3">
           <center>
-            <p className="fs-4 fw-bold text-primary">Alert</p>
-            <p className="fs-5 fw-bold text-muted">{message}</p>
+            <div className="fs-5 fw-bold text-muted mb-2">{message}</div>
             <Button
               type="button"
-              className="bg-blue px-3 mt-sm-2 rounded-0 text-primary border-2 border-primary text-primary"
+              className="bg-blue p-0 py-1 px-4 mt-sm-2 rounded-pill text-primary border-2 border-primary text-primary"
               onClick={handleClose}
             >
               OK

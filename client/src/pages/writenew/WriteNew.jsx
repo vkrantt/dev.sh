@@ -264,7 +264,7 @@ const WriteNew = () => {
 
             <Button
               variant="outline-primary"
-              className="rounded-0 border-2 px-4 mt-3"
+              className="rounded-pill border-2 px-4 mt-3"
               type="submit"
               onClick={handleSubmit}
               disabled={!form.title}

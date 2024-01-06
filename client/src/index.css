@@ -61,3 +61,6 @@ code {
   text-decoration: none;
   color: #000;
 }
+.active {
+  background: var(--theme) !important;
+}

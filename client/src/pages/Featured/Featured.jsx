@@ -135,7 +135,7 @@ const Featured = () => {
             </Form.Group>
 
             {searchTerm && (
-              <div className="bg-primary shadow-custom text-light p-2">
+              <div className="bg-light border border-secondary rounded-0 border-3 shadow-custom text-light p-2">
                 <div className="text-center">
                   {loading && <Loader variant="light" />}
                 </div>
@@ -148,12 +148,12 @@ const Featured = () => {
                         key={post._id}
                         style={{ cursor: "pointer" }}
                       >
-                        <SocialCard post={post} />
+                        <SocialCard featured={true} post={post} />
                       </div>
                     ))}
 
                   {!loading && posts?.length <= 0 && (
-                    <p className="text-center">No results found</p>
+                    <p className="text-center text-dark">No results found</p>
                   )}
                 </div>
               </div>

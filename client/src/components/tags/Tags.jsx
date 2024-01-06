@@ -5,19 +5,19 @@ import { tags } from "../json/tags";
 
 const Tags = ({ className }) => {
   return (
-    <>
+    <div>
       {tags.map((tag) => (
         <Button
           as={Link}
           key={tag.key}
           to={`/explore?q=${tag.value}`}
-          className={`rounded-0  p-2 tagsLink me-2 my-2  border-0 border-bottom border-primary border-3 shadow-xs ${className}`}
+          className={`rounded-pill text-primary active p-2 tagsLink me-2 my-2 border-primary border-2 px-3 shadow-xs ${className}`}
           variant="light"
         >
           {tag.key}
         </Button>
       ))}
-    </>
+    </div>
   );
 };
 

@@ -8,7 +8,6 @@ import {
   Navbar,
   Offcanvas,
 } from "react-bootstrap";
-import { Search } from "lucide-react";
 import Logo from "../logo/Logo";
 import { Link, useLocation } from "react-router-dom";
 import LoginModal from "../../modals/login/Loginmodal";
@@ -69,10 +68,8 @@ const Header = () => {
                 <Nav className=" d-flex align-items-center justify-content-end flex-grow-1 pe-3">
                   <Nav.Link
                     as={Link}
-                    className={`${
-                      pathname === "/"
-                        ? "active border-2 border-bottom border-primary text-primary"
-                        : ""
+                    className={`px-3 rounded-pill ${
+                      pathname === "/" ? "active rounded-pill text-primary" : ""
                     }`}
                     onClick={() => setShow(false)}
                     to="/"
@@ -81,9 +78,9 @@ const Header = () => {
                   </Nav.Link>
                   <Nav.Link
                     as={Link}
-                    className={`${
+                    className={`px-3 rounded-pill ${
                       pathname === "/explore"
-                        ? "active border-2 border-bottom border-primary text-primary"
+                        ? "active rounded-pill text-primary"
                         : ""
                     }`}
                     onClick={() => setShow(false)}
@@ -93,9 +90,9 @@ const Header = () => {
                   </Nav.Link>
                   <Nav.Link
                     as={Link}
-                    className={`${
+                    className={`px-3 rounded-pill ${
                       pathname === "/trending"
-                        ? "active border-2 border-bottom border-primary text-primary"
+                        ? "active rounded-pill text-primary"
                         : ""
                     }`}
                     onClick={() => setShow(false)}
@@ -111,9 +108,8 @@ const Header = () => {
                           round={true}
                           name={user?.firstName}
                           src={user?.image}
-                          value="86%"
+                          alt={user?.firstName}
                           size="30"
-                          className=""
                         />
                       }
                       id={`offcanvasNavbarDropdown-expand-lg`}
@@ -124,8 +120,8 @@ const Header = () => {
                             as={Link}
                             onClick={() => setShow(false)}
                             to="/write"
-                            className={`${
-                              pathname === "/write" ? "active" : ""
+                            className={`px-3 rounded-pill ${
+                              pathname === "/write" ? "active text-primary" : ""
                             }`}
                           >
                             Write New
@@ -134,8 +130,8 @@ const Header = () => {
                             as={Link}
                             onClick={() => setShow(false)}
                             to="/view"
-                            className={`${
-                              pathname === "/view" ? "active" : ""
+                            className={`px-3 rounded-pill ${
+                              pathname === "/view" ? "active text-primary" : ""
                             }`}
                           >
                             View
@@ -148,8 +144,10 @@ const Header = () => {
                             as={Link}
                             onClick={() => setShow(false)}
                             to="/featured"
-                            className={`${
-                              pathname === "/featured" ? "active" : ""
+                            className={`px-3 rounded-pill ${
+                              pathname === "/featured"
+                                ? "active text-primary"
+                                : ""
                             }`}
                           >
                             Featured
@@ -160,7 +158,9 @@ const Header = () => {
                         as={Link}
                         onClick={() => setShow(false)}
                         to="/profile"
-                        className={`${pathname === "/profile" ? "active" : ""}`}
+                        className={`px-3 rounded-pill ${
+                          pathname === "/profile" ? "active text-primary" : ""
+                        }`}
                       >
                         Profile
                       </NavDropdown.Item>
@@ -169,7 +169,9 @@ const Header = () => {
                         as={Link}
                         onClick={() => setShow(false)}
                         to="/saved"
-                        className={`${pathname === "/saved" ? "active" : ""}`}
+                        className={`px-3 rounded-pill ${
+                          pathname === "/saved" ? "active text-primary" : ""
+                        }`}
                       >
                         Saved
                       </NavDropdown.Item>
@@ -187,7 +189,7 @@ const Header = () => {
                         variant="primary"
                         size="sm "
                         onClick={handleShowLoginModal}
-                        className="bg-blue px-3 mt-sm-2 rounded-0 text-primary border-2 border-primary text-primary"
+                        className="bg-blue px-3 mt-3 mt-lg-0 rounded-pill text-primary border-2 border-primary text-primary"
                       >
                         Login
                       </Button>

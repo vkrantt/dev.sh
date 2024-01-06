@@ -162,7 +162,7 @@ const Signup = ({ handleClose }) => {
             <Form.Control
               type="text"
               placeholder="First Name"
-              className="border-2 rounded-0 shadow-none text-dark"
+              className="border-2 rounded-3 shadow-none text-dark"
               name="firstName"
               onChange={handleChange}
               value={credentials.firstName}
@@ -174,7 +174,7 @@ const Signup = ({ handleClose }) => {
             <Form.Control
               type="text"
               placeholder="Last Name"
-              className="border-2 rounded-0 shadow-none text-dark"
+              className="border-2 rounded-3 shadow-none text-dark"
               name="lastName"
               onChange={handleChange}
               value={credentials.lastName}
@@ -188,7 +188,7 @@ const Signup = ({ handleClose }) => {
         <Form.Control
           type="email"
           placeholder="name@example.com"
-          className="border-2 rounded-0 shadow-none text-dark"
+          className="border-2 rounded-3 shadow-none text-dark"
           name="email"
           onChange={handleChange}
           value={credentials.email}
@@ -201,7 +201,7 @@ const Signup = ({ handleClose }) => {
           <Form.Control
             type={show ? "text" : "password"}
             placeholder="Password"
-            className="border-2 rounded-0 shadow-none text-dark"
+            className="border-2 rounded-3 shadow-none text-dark"
             name="password"
             onChange={handleChange}
             value={credentials.password}
@@ -212,7 +212,7 @@ const Signup = ({ handleClose }) => {
           <Form.Control
             type={show ? "text" : "password"}
             placeholder="Confirm Password"
-            className="border-2 rounded-0 shadow-none text-dark"
+            className="border-2 rounded-3 shadow-none text-dark"
             name="confirmPassword"
             onChange={handleChange}
             value={credentials.confirmPassword}
@@ -229,7 +229,7 @@ const Signup = ({ handleClose }) => {
       <div className="mt-3">
         <Button
           variant="primary"
-          className="w-100 bg-blue border-2 rounded-0 text-primary"
+          className="w-100 bg-blue border-2 rounded-pill text-primary"
           type="submit"
           onClick={handleSubmit}
         >

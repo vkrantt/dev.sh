@@ -58,7 +58,7 @@ const Home = () => {
     <Container>
       <Row className="d-flex flex-md-row-reverse">
         <Col lg="8" className="order-last">
-          <h1 className="display-4 fw-bold text-primary my-3">Feed</h1>
+          <h1 className="display-4 fw-bold text-blue">Feed</h1>
           {/* Content for the first column */}
 
           {posts &&
@@ -85,7 +85,7 @@ const Home = () => {
             <div className=" mb-5 d-flex justify-content-center">
               <Button
                 onClick={() => handleLoadMore()}
-                className="bg-blue px-3 mt-sm-2 rounded-0 text-primary border-2 border-primary text-primary"
+                className="bg-blue px-3 mt-sm-2 rounded-pill text-primary border-2 border-primary text-primary"
               >
                 Show More
               </Button>
@@ -96,15 +96,13 @@ const Home = () => {
         <Col lg="4" className="position-relative order-first">
           {/* Content for the second column */}
           <div className="top-0 end-0 position-sticky pt-3">
-            <h3 className="fw-bold text-primary">
-              Discover more of what matters to you
-            </h3>
+            <h5 className="">Discover more of what matters to you</h5>
             <>
               <Tags />
             </>
 
             <div className=" mt-3 ">
-              <h3 className="fw-bold text-primary">Featured</h3>
+              <h4 className="">Featured</h4>
               <>
                 {featured &&
                   featured.map((post) => (

@@ -34,8 +34,8 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
 
   return (
     <div
-      className={`card border mb-4 bg-light rounded-0 w-100 shadow-custom ${
-        featured ? "border border-1 border-primary" : ""
+      className={`card border mb-3  rounded-2 w-100  ${
+        featured ? "bg-blue" : "bg-light shadow-custom"
       }`}
     >
       {/* Render the login modal */}
@@ -54,14 +54,15 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
               src={post.createdBy.image}
             />
             <div className="mx-2 ">
-              <span className="fw-bold">
+              <span className="">
                 {capitalizeName(post.createdBy.firstName)}{" "}
                 {capitalizeName(post.createdBy.lastName)}
               </span>{" "}
-              in{" "}
-              <span className="fw-bold">
-                {post.createdBy.expertise ?? "UX design"}{" "}
-              </span>
+              {post.createdBy.expertise && (
+                <span className="">
+                  in <span>{post.createdBy.expertise}</span>
+                </span>
+              )}
             </div>
           </div>
           <Link to={`/detail/${post._id}`}>
@@ -86,8 +87,8 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
               <span className="mx-2"> · </span>
               <Button
                 size="sm"
-                className={` rounded-0 ${
-                  featured ? "fs-sm border-1 p-0 px-1" : "border-2"
+                className={`rounded-pill text-primary active ${
+                  featured ? "fs-sm border-1 p-0 px-1" : "border-0"
                 }`}
                 variant="outline-primary"
               >
@@ -98,7 +99,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                   <span className="mx-2"> · </span>
                   <Button variant="none" size="sm">
                     <div
-                      className="d-flex align-items-center "
+                      className="d-flex align-items-center rounded-pill text-primary active p-2  border-primary border-2 px-3 "
                       onClick={() => handleEdit(post)}
                     >
                       <Edit size={15} />
@@ -110,7 +111,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                     size="sm"
                     onClick={() => handleDelete(post)}
                   >
-                    <div className="d-flex align-items-center ">
+                    <div className="d-flex align-items-center rounded-pill text-primary active p-2  border-primary border-2 px-3">
                       <Trash size={15} />
                     </div>
                   </Button>
@@ -122,7 +123,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                   size="sm"
                   onClick={() => handleDelete(post)}
                 >
-                  <div className="d-flex align-items-center ">
+                  <div className="d-flex align-items-center rounded-pill text-primary active p-2  border-primary border-2 px-3">
                     <Trash size={15} />
                   </div>
                 </Button>

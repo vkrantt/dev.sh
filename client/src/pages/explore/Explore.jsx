@@ -74,12 +74,12 @@ const Explore = () => {
         {paramValue && (
           <Col lg="8" className="m-auto mt-5">
             <h1 className="display-4 fw-bold text-blue">
-              {capitalText(paramValue)}
+              {capitalText(paramValue)} [{posts.length || 0}]
             </h1>
           </Col>
         )}
 
-        <Col lg="8" className="m-auto mt-5">
+        <Col lg="8" className="m-auto mt-2">
           {posts &&
             posts.map((post) => (
               <div key={post._id}>
@@ -102,7 +102,7 @@ const Explore = () => {
 
           {paramValue && !loading && totalPostsCount === 0 && (
             <div className="text-center">
-              <h6 className=" fw-bold">No results found</h6>
+              <h6 className=" fw-bold text-danger">No results found</h6>
             </div>
           )}
         </Col>

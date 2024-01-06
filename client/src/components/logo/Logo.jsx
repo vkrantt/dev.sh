@@ -4,8 +4,8 @@ import React from "react";
 const Logo = ({ show }) => {
   return (
     <div className="d-flex align-items-center">
-      <GitBranch size="36px" strokeWidth={3} />
-      {show ? <span className="mx-2 fw-bold">dev.sh</span> : null}
+      <GitBranch size="28px" strokeWidth={1} className="text-primary" />
+      {show ? <span className="mx-2">dev.sh</span> : null}
     </div>
   );
 };
