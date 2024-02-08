@@ -201,7 +201,7 @@ const WriteNew = () => {
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
           <Form>
             <Row className="mb-3">
-              <h1 className="display-4 fw-bold text-blue my-3">
+              <h1 className="display-4 fw-bold text-light-blue my-3">
                 Write and share
               </h1>
             </Row>
@@ -213,7 +213,7 @@ const WriteNew = () => {
                   name="title"
                   onChange={handleChange}
                   value={form.title}
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 rounded-1 bg-dark text-light"
                 />
               </Form.Group>
             </Row>
@@ -224,7 +224,7 @@ const WriteNew = () => {
                 <Form.Select
                   as={Col}
                   aria-label="Default select example"
-                  className=" shadow-none rounded-0 border-2"
+                  className=" shadow-none rounded-1 border-0 bg-dark text-light"
                   onChange={handleSelectTag}
                   value={form.tag}
                 >
@@ -259,12 +259,13 @@ const WriteNew = () => {
               className="mt-3 fs-4"
               onChange={handleSocialShare}
               checked={form.shared}
+              variant="dark"
               style={{ zIndex: 10 }}
             />
 
             <Button
               variant="outline-primary"
-              className="rounded-pill border-2 px-4 mt-3"
+              className="rounded-1 border-2 px-4 mt-3"
               type="submit"
               onClick={handleSubmit}
               disabled={!form.title}

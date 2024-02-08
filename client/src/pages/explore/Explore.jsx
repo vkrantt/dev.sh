@@ -59,7 +59,7 @@ const Explore = () => {
     <Container>
       <Row className="my-5">
         <Col lg="8" className="m-auto">
-          <h1 className="display-4 fw-bold text-blue">Explore</h1>
+          <h1 className="display-4 fw-bold text-light-blue">Explore</h1>
           <h3>Navigate your way through the guides and tutorials.</h3>
 
           <div className="my-2">
@@ -73,7 +73,7 @@ const Explore = () => {
 
         {paramValue && (
           <Col lg="8" className="m-auto mt-5">
-            <h1 className="display-4 fw-bold text-blue">
+            <h1 className="display-4 fw-bold text-light-blue">
               {capitalText(paramValue)} [{posts.length || 0}]
             </h1>
           </Col>
@@ -93,7 +93,7 @@ const Explore = () => {
             <div className=" mb-5 d-flex justify-content-center">
               <Button
                 onClick={() => handleLoadMore()}
-                className="bg-blue px-3 mt-sm-2 rounded-0 text-primary border-2 border-primary text-primary"
+                className="bg-blue px-3 mt-sm-2 rounded-1 text-primary border-2 border-primary text-primary"
               >
                 Show More
               </Button>

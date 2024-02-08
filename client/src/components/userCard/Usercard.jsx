@@ -73,7 +73,7 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
         />
 
         <div>
-          <div className="text-blue" style={{ fontSize: "14px" }}>
+          <div className="text-light-blue" style={{ fontSize: "14px" }}>
             <div>
               {capitalizeName(user?.firstName)} {capitalizeName(user?.lastName)}{" "}
               in{" "}
@@ -96,7 +96,7 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
         <Button
           size="sm"
           onClick={() => handleFollow(user._id)}
-          className="bg-blue rounded-0 px-4 text-primary mx-4"
+          className="bg-blue rounded-1 px-4 text-primary mx-4"
         >
           {loading ? <Loader /> : follow ? "Following" : "Follow"}
         </Button>

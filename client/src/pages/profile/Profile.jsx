@@ -157,7 +157,7 @@ const Profile = () => {
     <Container>
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
-          <h1 className="display-4 fw-bold text-blue my-3">Profile</h1>
+          <h1 className="display-4 fw-bold text-light-blue my-3">Profile</h1>
           {/* Image */}
           <div className="d-flex align-items-center justify-content-between">
             <div>
@@ -233,7 +233,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="4" sm="12">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="First name"
                   type="text"
                   placeholder="Enter first name"
@@ -246,7 +246,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="4" sm="12">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="Last name"
                   type="text"
                   placeholder="Enter last name"
@@ -259,7 +259,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="4" sm="12">
                 <Form.Label>Gender</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   type="text"
                   name="gender"
                   onChange={handleChange}
@@ -271,7 +271,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="6" sm="12">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="Email Address"
                   type="email"
                   placeholder="Enter email address"
@@ -287,7 +287,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="6" sm="12">
                 <Form.Label>Expertise</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="Experts in"
                   type="text"
                   placeholder="Experts in (Must)"
@@ -304,7 +304,7 @@ const Profile = () => {
             <Form.Group className="mb-3">
               <Form.Label>Bio</Form.Label>
               <Form.Control
-                className="shadow-none border-2 rounded-0"
+                className="shadow-none border-0 text-light bg-dark rounded-1"
                 as="textarea"
                 rows={3}
                 name="bio"
@@ -317,7 +317,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="4" md="4" sm="12">
                 <Form.Label>Country</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   type="text"
                   name="country"
                   onChange={handleChange}
@@ -328,7 +328,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="4" md="4" sm="12">
                 <Form.Label>City</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="City"
                   type="text"
                   placeholder="Enter city"
@@ -341,7 +341,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="4" md="4" sm="12">
                 <Form.Label>State</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="State"
                   type="text"
                   placeholder="Enter State"
@@ -359,7 +359,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="6" sm="12">
                 <Form.Label>Existing Password</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="Existing password"
                   type="password"
                   placeholder="Enter existing password"
@@ -372,7 +372,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="6" sm="12">
                 <Form.Label>New Password</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="New Password"
                   type="password"
                   placeholder="Enter new password"
@@ -384,7 +384,7 @@ const Profile = () => {
               <Form.Group as={Col} lg="6" sm="12">
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
-                  className="shadow-none border-2 rounded-0"
+                  className="shadow-none border-0 text-light bg-dark rounded-1"
                   label="Confirm password"
                   type="password"
                   placeholder="Enter password again"
@@ -397,7 +397,7 @@ const Profile = () => {
 
             <Button
               variant="primary"
-              className=" rounded-0 px-4 text-light mt-4"
+              className=" rounded-1 px-4 text-light mt-4"
               type="submit"
               onClick={handleSubmit}
             >
@@ -419,7 +419,7 @@ const Profile = () => {
             <Col>
               <Button
                 variant="none"
-                className="bg-danger rounded-0 px-4 text-light"
+                className="bg-danger rounded-1 px-4 text-light"
                 type="button"
                 onClick={handleDelete}
               >

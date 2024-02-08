@@ -34,7 +34,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
 
   return (
     <div
-      className={`card border mb-3  rounded-2 w-100  ${
+      className={`card text-light mb-3 bg-dark rounded-2 w-100  ${
         featured ? "bg-blue" : "bg-light shadow-custom"
       }`}
     >
@@ -87,7 +87,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
               <span className="mx-2"> · </span>
               <Button
                 size="sm"
-                className={`rounded-pill text-primary active ${
+                className={`rounded-1 text-primary active ${
                   featured ? "fs-sm border-1 p-0 px-1" : "border-0"
                 }`}
                 variant="outline-primary"
@@ -99,7 +99,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                   <span className="mx-2"> · </span>
                   <Button variant="none" size="sm">
                     <div
-                      className="d-flex align-items-center rounded-pill text-primary active p-2  border-primary border-2 px-3 "
+                      className="d-flex align-items-center rounded-1 text-primary active p-2  border-primary border-2 px-3"
                       onClick={() => handleEdit(post)}
                     >
                       <Edit size={15} />
@@ -111,7 +111,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                     size="sm"
                     onClick={() => handleDelete(post)}
                   >
-                    <div className="d-flex align-items-center rounded-pill text-primary active p-2  border-primary border-2 px-3">
+                    <div className="d-flex align-items-center rounded-1 text-primary active p-2  border-primary border-2 px-3">
                       <Trash size={15} />
                     </div>
                   </Button>
@@ -123,7 +123,7 @@ const SocialCard = ({ featured, post, handleDelete, isDeleteLoading }) => {
                   size="sm"
                   onClick={() => handleDelete(post)}
                 >
-                  <div className="d-flex align-items-center rounded-pill text-primary active p-2  border-primary border-2 px-3">
+                  <div className="d-flex align-items-center rounded-1 text-primary active p-2  border-primary border-2 px-3">
                     <Trash size={15} />
                   </div>
                 </Button>

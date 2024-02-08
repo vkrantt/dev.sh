@@ -32,7 +32,7 @@ const Trending = () => {
     <Container>
       <Row className="my-5">
         <Col lg="8" className="m-auto">
-          <h1 className="display-4 fw-bold text-blue mb-5">Trendings</h1>
+          <h1 className="display-4 fw-bold text-light-blue mb-5">Trendings</h1>
 
           {loading ? (
             <div className="">
@@ -42,7 +42,7 @@ const Trending = () => {
             posts &&
             posts.map((post, index) => (
               <div key={post._id} className="d-flex align-items-top">
-                <div className="display-1 fw-bold pe-2 text-muted">
+                <div className="display-1 fw-bold pe-2 text-light-blue">
                   {index + 1}
                 </div>
                 <SocialCard post={post} />

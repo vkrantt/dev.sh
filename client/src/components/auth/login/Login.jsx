@@ -95,7 +95,7 @@ const Login = ({ handleClose }) => {
       <div className="mt-3">
         <Button
           variant="primary"
-          className="w-100 bg-blue border-2 rounded-pill text-primary"
+          className="w-100 bg-blue border-2 rounded-3 text-primary"
           onClick={handleSubmit}
           type="submit"
         >

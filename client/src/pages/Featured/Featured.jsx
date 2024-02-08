@@ -72,6 +72,7 @@ const Featured = () => {
         ]);
         setShowAlertModal(true);
         setAlertMessage("Added to show as featured.");
+        setSearchTerm("");
       });
   };
 
@@ -117,8 +118,8 @@ const Featured = () => {
 
       <Row>
         <Col lg="8" md="12" sm="12" className="m-auto mb-5">
-          <span className="text-primary">
-            <h1 className="display-4 fw-bold text-primary my-3">Featured</h1>
+          <span className="">
+            <h1 className="display-4 fw-bold text-light-blue my-3">Featured</h1>
           </span>
 
           <div className="mt-4">
@@ -130,12 +131,12 @@ const Featured = () => {
                 value={searchTerm}
                 type="text"
                 placeholder="Search"
-                className="shadow-none border-2 rounded-0"
+                className="shadow-none border-0 text-light bg-dark rounded-1"
               />
             </Form.Group>
 
             {searchTerm && (
-              <div className="bg-light border border-secondary rounded-0 border-3 shadow-custom text-light p-2">
+              <div className="bg-dark text-light border border-secondary rounded-1 border-3 shadow-custom text-light p-2">
                 <div className="text-center">
                   {loading && <Loader variant="light" />}
                 </div>
@@ -149,30 +150,35 @@ const Featured = () => {
                         style={{ cursor: "pointer" }}
                       >
                         <SocialCard featured={true} post={post} />
+                        <hr />
                       </div>
                     ))}
 
                   {!loading && posts?.length <= 0 && (
-                    <p className="text-center text-dark">No results found</p>
+                    <p className="text-center text-light">No results found</p>
                   )}
                 </div>
               </div>
             )}
 
-            <div className="my-4">
-              <span className="text-primary my-2">
-                <div className="text-decoration-underline">Featured Posts</div>
-              </span>
-              {featuredPosts?.map((post, i) => (
-                <div key={i} className="my-2 bg-light">
-                  <div className="d-flex justify-content-between align-items-center p-3">
-                    <SocialCard post={post} handleDelete={handleDelete} />
+            {featuredPosts.length > 0 && (
+              <div className="my-4">
+                <span className="text-primary my-2">
+                  <div className="text-decoration-underline">
+                    Featured Posts
                   </div>
-                </div>
-              ))}
+                </span>
+                {featuredPosts?.map((post, i) => (
+                  <div key={i} className="my-2 bg-dark">
+                    <div className="d-flex justify-content-between align-items-center p-3">
+                      <SocialCard post={post} handleDelete={handleDelete} />
+                    </div>
+                  </div>
+                ))}
 
-              {loading && <Homecard count="3" />}
-            </div>
+                {loading && <Homecard count="3" />}
+              </div>
+            )}
           </div>
         </Col>
       </Row>

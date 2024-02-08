@@ -63,7 +63,9 @@ const ViewAll = () => {
         setShowAlertModal={setShowAlertModal}
       ></Alertmodal>
 
-      <h1 className="display-4 fw-bold text-blue my-3">View</h1>
+      <h1 className="display-4 fw-bold text-light-blue my-3">
+        View [{posts.length || 0}]
+      </h1>
       {loading ? (
         <div className=" my-5">
           <Homecard count="5" />

@@ -11,7 +11,7 @@ const Tags = ({ className }) => {
           as={Link}
           key={tag.key}
           to={`/explore?q=${tag.value}`}
-          className={`rounded-pill text-primary active p-2 tagsLink me-2 my-2 border-primary border-2 px-3 shadow-xs ${className}`}
+          className={`rounded-3 btn-sm text-light active p-2 tagsLink me-2 my-2 bg-secondary border-2 border-secondary px-3 shadow-xs ${className}`}
           variant="light"
         >
           {tag.key}

@@ -8,6 +8,8 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #0c0c0c !important;
+  color: #fff !important;
 }
 
 code {
@@ -63,4 +65,8 @@ code {
 }
 .active {
   background: var(--theme) !important;
+}
+
+.text-light-blue {
+  color: #9ec5fe !important;
 }

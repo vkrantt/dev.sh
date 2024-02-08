@@ -343,16 +343,16 @@ const DetailPage = () => {
                   <Form.Label>Add a Comment</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows={12}
+                    rows={8}
                     value={newComment.comment}
-                    className=" shadow-none border-2 rounded-0"
+                    className=" shadow-none border-0 text-light rounded-1 bg-dark"
                     onChange={handleCommentChange}
                   />
                 </Form.Group>
                 <Button
                   variant="primary"
                   size="sm"
-                  className="mt-2 shadow-none bg-blue border-2 rounded-0 text-primary"
+                  className="mt-2 shadow-none bg-blue border-2 rounded-1 text-primary"
                   onClick={handleAddComment}
                 >
                   {commentLoading ? <Loader /> : "Add Comment"}

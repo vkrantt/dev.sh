@@ -229,7 +229,7 @@ const Signup = ({ handleClose }) => {
       <div className="mt-3">
         <Button
           variant="primary"
-          className="w-100 bg-blue border-2 rounded-pill text-primary"
+          className="w-100 bg-blue border-2 rounded-1 text-primary"
           type="submit"
           onClick={handleSubmit}
         >

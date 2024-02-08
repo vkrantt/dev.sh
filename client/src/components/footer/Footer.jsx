@@ -5,9 +5,9 @@ const Footer = () => {
   const d = new Date();
   let year = d.getFullYear();
   return (
-    <Container fluid className="bg-light">
+    <Container fluid className="bg-dark">
       <Container className=" d-flex justify-content-between pt-3">
-        <p>0.0.5</p>
+        <p>V0.0.6</p>
         <p className="d-flex align-items-center">&copy; {year}</p>
         <p>Email</p>
       </Container>

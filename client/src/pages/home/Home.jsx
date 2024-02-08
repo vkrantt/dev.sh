@@ -23,7 +23,7 @@ const Home = () => {
     axios
       .get(`${BASE_URL}/post?page=${page}&pageSize=${itemsRequired}`)
       .then((response) => {
-        setPosts([...posts, ...response.data.response.posts]);
+        setPosts((prev) => [...prev, ...response.data.response.posts]);
         setTotalPostsCount(response.data.response.totalCount);
         setLoading(false);
       })
@@ -58,7 +58,7 @@ const Home = () => {
     <Container>
       <Row className="d-flex flex-md-row-reverse">
         <Col lg="8" className="order-last">
-          <h1 className="display-4 fw-bold text-blue">Feed</h1>
+          <h1 className="display-4 fw-bold text-light-blue">Feed</h1>
           {/* Content for the first column */}
 
           {posts &&
@@ -81,7 +81,7 @@ const Home = () => {
             </b>
           </div>
 
-          {totalPostsCount != posts.length && !loading && (
+          {totalPostsCount !== posts.length && !loading && (
             <div className=" mb-5 d-flex justify-content-center">
               <Button
                 onClick={() => handleLoadMore()}
@@ -95,25 +95,27 @@ const Home = () => {
 
         <Col lg="4" className="position-relative order-first">
           {/* Content for the second column */}
-          <div className="top-0 end-0 position-sticky pt-3">
-            <h5 className="">Discover more of what matters to you</h5>
+          <div className="top-0 end-0 position-sticky pt-3 mb-4">
+            <h5 className="text-light">Discover more of what matters to you</h5>
             <>
               <Tags />
             </>
 
-            <div className=" mt-3 ">
-              <h4 className="">Featured</h4>
-              <>
-                {featured &&
-                  featured.map((post) => (
-                    <div key={post._id}>
-                      <SocialCard featured={true} post={post} />
-                    </div>
-                  ))}
+            {featured.length > 0 && (
+              <div className=" mt-3 ">
+                <h4 className="">Featured</h4>
+                <>
+                  {featured &&
+                    featured.map((post) => (
+                      <div key={post._id}>
+                        <SocialCard featured={true} post={post} />
+                      </div>
+                    ))}
 
-                {featuredLoading && <Homecard count="2" />}
-              </>
-            </div>
+                  {featuredLoading && <Homecard count="2" />}
+                </>
+              </div>
+            )}
           </div>
         </Col>
       </Row>
