@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { BASE_URL } from "../../config/config";
 import { get } from "../../components/handlers/storage";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import Homecard from "../../components/skeleton/homecard";
 import SocialCard from "../../components/socialCard.jsx/SocialCard";
 
@@ -29,26 +29,30 @@ const Saved = () => {
 
   return (
     <Container>
-      <h1 className="display-4 fw-bold text-light-blue my-3">
-        Saved bookmarks [{posts.length || 0}]
-      </h1>
-      {loading ? (
-        <div className=" my-5">
-          <Homecard count="5" />
-        </div>
-      ) : (
-        posts.map((post) => (
-          <div key={post._id}>
-            <SocialCard post={post} />
-          </div>
-        ))
-      )}
+      <Row>
+        <Col lg="8" className="m-auto">
+          <h1 className="display-4 fw-bold text-light-blue my-3">
+            Saved bookmarks [{posts.length || 0}]
+          </h1>
+          {loading ? (
+            <div className=" my-5">
+              <Homecard count="5" />
+            </div>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id}>
+                <SocialCard post={post} />
+              </div>
+            ))
+          )}
 
-      {!loading && posts.length === 0 && (
-        <Alert variant="primary text-center">
-          You don't have any bookmarks yet.
-        </Alert>
-      )}
+          {!loading && posts.length === 0 && (
+            <Alert variant="primary text-center">
+              You don't have any bookmarks yet.
+            </Alert>
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 };

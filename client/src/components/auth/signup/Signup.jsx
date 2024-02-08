@@ -92,7 +92,7 @@ const Signup = ({ handleClose }) => {
       };
     } else {
       formData = {
-        image: "https://api.dicebear.com/avatar.svg",
+        image: "https://robohash.org/Terry.png?set=set4",
         firstName: credentials.firstName,
         lastName: credentials.lastName,
         email: credentials.email,

@@ -18,6 +18,7 @@ import AdminAuthguard from "./routes/AdminAuthguard";
 import SuperAdminAuthguard from "./routes/SuperAdminAuthguard";
 import Followers from "./pages/user/followers/Followers";
 import Following from "./pages/user/following/Following";
+import Lists from "./pages/lists/Lists";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -39,6 +40,15 @@ const App = () => {
             element={
               <SuperAdminAuthguard
                 children={<Featured />}
+                isSuperAdmin={user?.isSuperAdmin}
+              />
+            }
+          />
+          <Route
+            path="/lists"
+            element={
+              <SuperAdminAuthguard
+                children={<Lists />}
                 isSuperAdmin={user?.isSuperAdmin}
               />
             }

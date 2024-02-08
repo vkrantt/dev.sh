@@ -22,6 +22,7 @@ import { get } from "../../components/handlers/storage";
 import { getUserDetail } from "../../services/user";
 import LoginModal from "../../modals/login/Loginmodal";
 import Alertmodal from "../../modals/alert/Alertmodal";
+import SocialCard from "../../components/socialCard.jsx/SocialCard";
 
 const DetailPage = () => {
   const [loggedInUser] = useState(getUserDetail());
@@ -240,7 +241,7 @@ const DetailPage = () => {
         <Row>
           <Col lg="8" className="m-auto">
             <div>
-              <h1 className="text-blue display-6">{post.title}</h1>
+              <h1 className="text-primary fw-bold display-6">{post.title}</h1>
               <p className="text-secondary">
                 Created on: <i>{formatDate(post.createdAt)}</i>
               </p>
@@ -304,9 +305,8 @@ const DetailPage = () => {
                 whiteSpace: "pre-line",
               }}
             ></Col>
-
-            {/* Comment section */}
             <hr className="text-blue" />
+            {/* Comment section */}
             <div className="my-5">
               <h4 className="text-primary">Comment Section</h4>
               <ListGroup className="mb-3">
@@ -359,6 +359,17 @@ const DetailPage = () => {
                 </Button>
               </Form>
             </div>
+            {/* Related Resource */}
+            {post?.list && post?.relatedPosts?.length > 0 && (
+              <Row className="d-flex justify-content-between mb-5">
+                <h3 className="display-6 text-primary">Related posts</h3>
+                {post.relatedPosts.map((item, i) => (
+                  <Col lg="6" key={i} className="">
+                    <SocialCard post={item} hideUser={true} />
+                  </Col>
+                ))}
+              </Row>
+            )}
           </Col>
         </Row>
       )}

@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import Loader from "../../components/loader/Loader";
 import Alertmodal from "../../modals/alert/Alertmodal";
 import { tags } from "../../components/json/tags";
-import { Key } from "lucide-react";
+import { handleError } from "../../components/handlers/ErrorHandler";
 
 const WriteNew = () => {
   const [searchParams] = useSearchParams();
@@ -29,8 +29,30 @@ const WriteNew = () => {
     description: "",
     tag: "",
     shared: false,
+    list: "",
   });
   const [postFromId, setPostFromId] = useState();
+  const [isListLoading, setIsListLoading] = useState(false);
+  const [Lists, setLists] = useState([]);
+
+  useEffect(() => {
+    setIsListLoading(true);
+    axios
+      .get(`${BASE_URL}/list`, {
+        headers: {
+          "Content-Type": "application/type",
+          Authorization: `Bearer ${get("dsh_token")}`,
+        },
+      })
+      .then((data) => {
+        setLists(data.data.response);
+        setIsListLoading(false);
+      })
+      .catch((error) => {
+        handleError(error);
+        setIsListLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     if (!postId) {
@@ -66,6 +88,7 @@ const WriteNew = () => {
             tag: data.tag,
             description: data.description,
             shared: data.shared,
+            list: data.list,
           });
 
           setLoading(false);
@@ -94,6 +117,13 @@ const WriteNew = () => {
     setForm({
       ...form,
       tag: e.target.value,
+    });
+  };
+
+  const handleSelectList = (e) => {
+    setForm({
+      ...form,
+      list: e.target.value,
     });
   };
 
@@ -160,6 +190,7 @@ const WriteNew = () => {
       setAlertMessage("Please fill all the fields");
       return;
     }
+    if (form.list === "") delete form.list;
     setLoading(true);
     const url = checkForUpdate(postFromId?._id);
     axios
@@ -218,25 +249,46 @@ const WriteNew = () => {
               </Form.Group>
             </Row>
 
-            <div>
-              <Form.Label>Tags</Form.Label>
-              <Row className="mb-3 mx-0">
-                <Form.Select
-                  as={Col}
-                  aria-label="Default select example"
-                  className=" shadow-none rounded-1 border-0 bg-dark text-light"
-                  onChange={handleSelectTag}
-                  value={form.tag}
-                >
-                  <option>Select Tag</option>
-                  {tags.map((tag) => (
-                    <option key={tag.key} value={tag.value}>
-                      {tag.key}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Row>
-            </div>
+            <Row>
+              <Col lg="6">
+                <Form.Label>Tags</Form.Label>
+                <Row className="mb-3 mx-0">
+                  <Form.Select
+                    as={Col}
+                    aria-label="Default select example"
+                    className=" shadow-none rounded-1 border-0 bg-dark text-light"
+                    onChange={handleSelectTag}
+                    value={form.tag}
+                  >
+                    <option>Select Tag</option>
+                    {tags.map((tag) => (
+                      <option key={tag.key} value={tag.value}>
+                        {tag.key}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Row>
+              </Col>
+              <Col lg="6">
+                <Form.Label>Select List</Form.Label>
+                <Row className="mb-3 mx-0">
+                  <Form.Select
+                    as={Col}
+                    aria-label="Default select example"
+                    className=" shadow-none rounded-1 border-0 bg-dark text-light"
+                    onChange={handleSelectList}
+                    value={form.list}
+                  >
+                    <option value="">Select List</option>
+                    {Lists.map((list, i) => (
+                      <option key={i} value={list._id}>
+                        {list.name}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Row>
+              </Col>
+            </Row>
 
             <div>
               <Form.Label>Description</Form.Label>
@@ -259,8 +311,6 @@ const WriteNew = () => {
               className="mt-3 fs-4"
               onChange={handleSocialShare}
               checked={form.shared}
-              variant="dark"
-              style={{ zIndex: 10 }}
             />
 
             <Button

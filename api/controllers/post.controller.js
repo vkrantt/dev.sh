@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 
 // Create New post
 export async function createPost(req, res) {
-  const { title, description, tag, shared } = req.body;
+  const { title, description, tag, shared, list } = req.body;
   try {
     const post = await Post.create({
       title,
@@ -11,6 +11,7 @@ export async function createPost(req, res) {
       tag,
       createdBy: req.user._id,
       shared,
+      list: list,
     });
 
     if (post) {
@@ -97,10 +98,18 @@ export async function getPostById(req, res) {
   const { id } = req.params;
   try {
     const query = { _id: id };
-    const post = await Post.findOne(query).populate({
+    let post = await Post.findOne(query).populate({
       path: "comments.user",
       select: "firstName lastName image expertise",
     });
+
+    if (post.list) {
+      const relatedPosts = await Post.find({
+        list: post.list,
+        _id: { $ne: post._id },
+      });
+      post = { ...post.toObject(), relatedPosts };
+    }
 
     post.createdBy = await User.findById(post.createdBy).select(
       "-password -links"
@@ -197,10 +206,19 @@ export async function commentPost(req, res) {
 // Update post
 export async function updatePost(req, res) {
   const postId = req.params.id;
+  const { list } = req.body;
   try {
     const post = await Post.findById(postId);
     if (!post) {
       throwError(res, "Post not found.");
+    }
+
+    if (list === "" || list === undefined) {
+      await Post.findByIdAndUpdate(
+        postId,
+        { $unset: { list: 1 } },
+        { new: true }
+      );
     }
 
     await Post.findByIdAndUpdate(postId, { $set: req.body }, { new: true });

@@ -9,6 +9,7 @@ import chalk from "chalk";
 // routes
 import users from "./api/routes/user.route.js";
 import posts from "./api/routes/post.route.js";
+import lists from "./api/routes/list.route.js";
 
 const server = express();
 server.use(express.json());
@@ -22,6 +23,7 @@ databaseConnection();
 // Routes
 server.use("/api/users", users);
 server.use("/api/post", posts);
+server.use("/api/list", lists);
 
 // root route
 server.get("/", (req, res) => {

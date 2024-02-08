@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import SocialCard from "../../components/socialCard.jsx/SocialCard";
 import { useEffect } from "react";
 import axios from "axios";
@@ -56,37 +56,41 @@ const ViewAll = () => {
 
   return (
     <Container>
-      {/* Render alert modal */}
-      <Alertmodal
-        message={alertMessage}
-        handleShow={showAlertModal}
-        setShowAlertModal={setShowAlertModal}
-      ></Alertmodal>
+      <Row>
+        <Col lg="8" className="m-auto">
+          {/* Render alert modal */}
+          <Alertmodal
+            message={alertMessage}
+            handleShow={showAlertModal}
+            setShowAlertModal={setShowAlertModal}
+          ></Alertmodal>
 
-      <h1 className="display-4 fw-bold text-light-blue my-3">
-        View [{posts.length || 0}]
-      </h1>
-      {loading ? (
-        <div className=" my-5">
-          <Homecard count="5" />
-        </div>
-      ) : (
-        posts.map((post) => (
-          <div key={post._id}>
-            <SocialCard
-              post={post}
-              handleDelete={handleDelete}
-              isDeleteLoading={isDeleteLoading}
-            />
-          </div>
-        ))
-      )}
+          <h1 className="display-4 fw-bold text-light-blue my-3">
+            View [{posts.length || 0}]
+          </h1>
+          {loading ? (
+            <div className=" my-5">
+              <Homecard count="5" />
+            </div>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id}>
+                <SocialCard
+                  post={post}
+                  handleDelete={handleDelete}
+                  isDeleteLoading={isDeleteLoading}
+                />
+              </div>
+            ))
+          )}
 
-      {!loading && posts.length === 0 && (
-        <Alert variant="primary text-center">
-          You don't have any posts yet. Please write some post.
-        </Alert>
-      )}
+          {!loading && posts.length === 0 && (
+            <Alert variant="primary text-center">
+              You don't have any posts yet. Please write some post.
+            </Alert>
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 };

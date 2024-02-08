@@ -23,7 +23,7 @@ const Home = () => {
     axios
       .get(`${BASE_URL}/post?page=${page}&pageSize=${itemsRequired}`)
       .then((response) => {
-        setPosts((prev) => [...prev, ...response.data.response.posts]);
+        setPosts([...posts, ...response.data.response.posts]);
         setTotalPostsCount(response.data.response.totalCount);
         setLoading(false);
       })

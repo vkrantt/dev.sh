@@ -70,3 +70,25 @@ code {
 .text-light-blue {
   color: #9ec5fe !important;
 }
+
+.bg-blue-2 {
+  background: #9ec5fe !important;
+}
+
+.list-card-shadow {
+  width: 98% !important;
+  margin: auto;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.list-card-shadow-2 {
+  width: 96% !important;
+  margin: auto;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}

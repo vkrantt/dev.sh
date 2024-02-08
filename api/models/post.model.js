@@ -48,6 +48,10 @@ const postShchema = mongoose.Schema(
       default: false,
     },
     bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    list: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "List",
+    },
   },
   { timestamps: true }
 );

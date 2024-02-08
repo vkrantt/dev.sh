@@ -1,12 +1,26 @@
-/* .ql-toolbar.ql-snow {
+.ql-toolbar.ql-snow {
   border: none !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  background: #212529 !important;
+  border-bottom: 2px solid rgb(81, 83, 95) !important;
 }
 
 .ql-container.ql-snow {
   border: none !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
   color: #ffffff !important;
+  background: #212529 !important;
+  /* border: 2px solid rgb(81, 83, 95) !important; */
+}
+.ql-editor {
+  min-height: 400px !important;
 }
 
+/* .ql-editor {
+  min-height: 18em;
+} */
 .ql-toolbar .ql-stroke {
   fill: none;
   stroke: #fff;
@@ -24,4 +38,4 @@
 .ql-picker-options {
   background: rgb(33, 37, 41) !important;
   border: 2px solid #454545 !important;
-} */
+}

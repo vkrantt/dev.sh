@@ -65,8 +65,8 @@ const Header = () => {
                   <Logo show={true} />
                 </Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="d-flex align-items-center justify-content-center flex-grow-1 pe-3">
+              <Offcanvas.Body className="d-flex align-items-center flex-lg-row flex-sm-column justify-content-lg-between">
+                <Nav className="d-flex align-items-center justify-content-center flex-lg-grow-1 pe-3">
                   <Nav.Link
                     as={Link}
                     className={`${
@@ -105,114 +105,125 @@ const Header = () => {
                   </Nav.Link>
                 </Nav>
 
-                {token ? (
-                  <NavDropdown
-                    menuVariant="dark"
-                    drop="down-centered"
-                    title={
-                      <Avatar
-                        round={true}
-                        name={user?.firstName}
-                        src={user?.image}
-                        alt={user?.firstName}
-                        size="30"
-                      />
-                    }
-                    id={`offcanvasNavbarDropdown-expand-lg`}
-                  >
-                    {user?.isAdmin || user?.isSuperAdmin ? (
-                      <>
-                        <NavDropdown.Item
-                          as={Link}
-                          onClick={() => setShow(false)}
-                          to="/write"
-                          className={` ${
-                            pathname === "/write"
-                              ? "text-light border-2 border-bottom border-primary"
-                              : ""
-                          }`}
-                        >
-                          Write New
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          onClick={() => setShow(false)}
-                          to="/view"
-                          className={` ${
-                            pathname === "/view"
-                              ? "text-light border-2 border-bottom border-primary"
-                              : ""
-                          }`}
-                        >
-                          View
-                        </NavDropdown.Item>
-                      </>
-                    ) : null}
-                    {user?.isSuperAdmin ? (
-                      <>
-                        <NavDropdown.Item
-                          as={Link}
-                          onClick={() => setShow(false)}
-                          to="/featured"
-                          className={` ${
-                            pathname === "/featured"
-                              ? "text-light border-2 border-bottom border-primary"
-                              : ""
-                          }`}
-                        >
-                          Featured
-                        </NavDropdown.Item>
-                      </>
-                    ) : null}
-                    <NavDropdown.Item
-                      as={Link}
-                      onClick={() => setShow(false)}
-                      to="/profile"
-                      className={` ${
-                        pathname === "/profile"
-                          ? "text-light border-2 border-bottom border-primary"
-                          : ""
-                      }`}
+                <div>
+                  {token ? (
+                    <NavDropdown
+                      menuVariant="dark"
+                      drop="down-centered"
+                      title={
+                        <Avatar
+                          round={true}
+                          name={user?.firstName}
+                          src={user?.image}
+                          alt={user?.firstName}
+                          size="30"
+                          style={{ border: "2px solid #9ec5fe" }}
+                        />
+                      }
+                      id={`offcanvasNavbarDropdown-expand-lg`}
                     >
-                      Profile
-                    </NavDropdown.Item>
+                      {user?.isAdmin || user?.isSuperAdmin ? (
+                        <>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/write"
+                            className={` ${
+                              pathname === "/write"
+                                ? "text-light border-2 border-bottom border-primary"
+                                : ""
+                            }`}
+                          >
+                            Write New
+                          </NavDropdown.Item>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/view"
+                            className={` ${
+                              pathname === "/view"
+                                ? "text-light border-2 border-bottom border-primary"
+                                : ""
+                            }`}
+                          >
+                            View
+                          </NavDropdown.Item>
+                        </>
+                      ) : null}
+                      {user?.isSuperAdmin ? (
+                        <>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/featured"
+                            className={` ${
+                              pathname === "/featured"
+                                ? "text-light border-2 border-bottom border-primary"
+                                : ""
+                            }`}
+                          >
+                            Featured
+                          </NavDropdown.Item>
+                          <NavDropdown.Item
+                            as={Link}
+                            onClick={() => setShow(false)}
+                            to="/lists"
+                            className={` ${
+                              pathname === "/lists"
+                                ? "text-light border-2 border-bottom border-primary"
+                                : ""
+                            }`}
+                          >
+                            Lists
+                          </NavDropdown.Item>
+                        </>
+                      ) : null}
+                      <NavDropdown.Item
+                        as={Link}
+                        onClick={() => setShow(false)}
+                        to="/profile"
+                        className={` ${
+                          pathname === "/profile"
+                            ? "text-light border-2 border-bottom border-primary"
+                            : ""
+                        }`}
+                      >
+                        Profile
+                      </NavDropdown.Item>
 
-                    <NavDropdown.Item
-                      as={Link}
-                      onClick={() => setShow(false)}
-                      to="/saved"
-                      className={` ${
-                        pathname === "/saved"
-                          ? "text-light border-2 border-bottom border-primary"
-                          : ""
-                      }`}
-                    >
-                      Saved
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => handleLogout()}>
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                ) : (
-                  <div className="mx-2">
-                    <LoginModal
-                      handleShow={showLoginModal}
-                      handleClose={handleCloseLoginModal}
-                    ></LoginModal>
-                    <Button
-                      variant="primary"
-                      size="sm "
-                      onClick={handleShowLoginModal}
-                      className="bg-blue px-3 mt-lg-0 rounded-1 text-primary border-2 border-primary text-primary"
-                    >
-                      Login
-                    </Button>
-                  </div>
-                )}
-
-                {/* <Button variant="none" className="p-0 mb-1">
-                  <Search size={20} strokeWidth={2} color="var(--blue)" />
-                </Button> */}
+                      <NavDropdown.Item
+                        as={Link}
+                        onClick={() => setShow(false)}
+                        to="/saved"
+                        className={` ${
+                          pathname === "/saved"
+                            ? "text-light border-2 border-bottom border-primary"
+                            : ""
+                        }`}
+                      >
+                        Saved
+                      </NavDropdown.Item>
+                      <NavDropdown.Item onClick={() => handleLogout()}>
+                        Logout
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  ) : (
+                    <div className="mx-2">
+                      <LoginModal
+                        handleShow={showLoginModal}
+                        handleClose={handleCloseLoginModal}
+                      ></LoginModal>
+                      <Button
+                        variant="primary"
+                        size="sm "
+                        onClick={handleShowLoginModal}
+                        className="bg-blue px-3 mt-lg-0 rounded-1 text-primary border-2 border-primary text-primary"
+                      >
+                        Login
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
