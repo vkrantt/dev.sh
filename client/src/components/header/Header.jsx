@@ -15,6 +15,7 @@ import { get, remove } from "../handlers/storage";
 import { useState } from "react";
 import { getUserDetail } from "../../services/user";
 import Avatar from "react-avatar";
+import { Compass, Home, LineChart } from "lucide-react";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -69,7 +70,7 @@ const Header = () => {
                 <Nav className="d-flex align-items-center justify-content-center flex-lg-grow-1 pe-3">
                   <Nav.Link
                     as={Link}
-                    className={`${
+                    className={`d-flex align-items-center  gap-1 ${
                       pathname === "/"
                         ? "text-light-blue border-bottom border-2 border-primary"
                         : ""
@@ -77,11 +78,11 @@ const Header = () => {
                     onClick={() => setShow(false)}
                     to="/"
                   >
-                    Home
+                    <Home size={18} /> Home
                   </Nav.Link>
                   <Nav.Link
                     as={Link}
-                    className={` ${
+                    className={`d-flex align-items-center  gap-1  ${
                       pathname === "/explore"
                         ? "text-light-blue border-bottom border-2 border-primary"
                         : ""
@@ -89,11 +90,11 @@ const Header = () => {
                     onClick={() => setShow(false)}
                     to="/explore"
                   >
-                    Explore
+                    <Compass size={18} /> Explore
                   </Nav.Link>
                   <Nav.Link
                     as={Link}
-                    className={` ${
+                    className={`d-flex align-items-center  gap-1  ${
                       pathname === "/trending"
                         ? "text-light-blue border-bottom border-2 border-primary"
                         : ""
@@ -101,7 +102,7 @@ const Header = () => {
                     onClick={() => setShow(false)}
                     to="/trending"
                   >
-                    Trending
+                    <LineChart size={18} /> Trending
                   </Nav.Link>
                 </Nav>
 
@@ -214,12 +215,12 @@ const Header = () => {
                         handleClose={handleCloseLoginModal}
                       ></LoginModal>
                       <Button
-                        variant="primary"
+                        variant="dark"
                         size="sm "
                         onClick={handleShowLoginModal}
-                        className="bg-blue px-3 mt-lg-0 rounded-1 text-primary border-2 border-primary text-primary"
+                        className="text-light-blue"
                       >
-                        Login
+                        Login / Register
                       </Button>
                     </div>
                   )}

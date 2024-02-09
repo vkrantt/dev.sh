@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Login from "../../components/auth/login/Login";
 import Signup from "../../components/auth/signup/Signup";
+import Logo from "../../components/logo/Logo";
 
 const LoginModal = ({ handleShow, handleClose }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,6 +12,9 @@ const LoginModal = ({ handleShow, handleClose }) => {
       <Modal show={handleShow} onHide={handleClose}>
         <Modal.Body className="bg-light rounded-1">
           <>
+            <div className="mb-2">
+              <Logo show className="text-dark fs-4" />
+            </div>
             {isLogin ? (
               <Login handleClose={handleClose} />
             ) : (

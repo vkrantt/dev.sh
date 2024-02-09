@@ -75,11 +75,15 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
         <div>
           <div className="text-light-blue" style={{ fontSize: "14px" }}>
             <div>
-              {capitalizeName(user?.firstName)} {capitalizeName(user?.lastName)}{" "}
-              in{" "}
-              <span className="fw-bold">
-                {user?.expertise ? capitalizeName(user?.expertise) : "Reading"}
-              </span>
+              {capitalizeName(user?.firstName)} {capitalizeName(user?.lastName)}
+              {user?.expertise && (
+                <>
+                  <span className="mx-1">in</span>
+                  <span className="fw-bold">
+                    {capitalizeName(user?.expertise)}
+                  </span>
+                </>
+              )}
             </div>
             <div
               className="text-secondary fw-bold"

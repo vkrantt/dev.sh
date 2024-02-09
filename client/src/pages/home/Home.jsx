@@ -101,21 +101,19 @@ const Home = () => {
               <Tags />
             </>
 
-            {featured.length > 0 && (
-              <div className=" mt-3 ">
-                <h4 className="">Featured</h4>
-                <>
-                  {featured &&
-                    featured.map((post) => (
-                      <div key={post._id}>
-                        <SocialCard featured={true} post={post} />
-                      </div>
-                    ))}
+            <div className="mt-3">
+              <h4>Featured</h4>
+              <>
+                {featured &&
+                  featured.map((post) => (
+                    <div key={post._id}>
+                      <SocialCard featured={true} post={post} />
+                    </div>
+                  ))}
 
-                  {featuredLoading && <Homecard count="2" />}
-                </>
-              </div>
-            )}
+                {featuredLoading && <Homecard count="2" />}
+              </>
+            </div>
           </div>
         </Col>
       </Row>

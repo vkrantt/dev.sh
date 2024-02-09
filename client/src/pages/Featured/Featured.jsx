@@ -87,9 +87,6 @@ const Featured = () => {
       .then((response) => {
         setShowAlertModal(true);
         setAlertMessage("Removed from featured.");
-      })
-      .catch((error) => {
-        console.error("Error deleting post:", error);
       });
   };
 
@@ -170,7 +167,7 @@ const Featured = () => {
                 </span>
                 {featuredPosts?.map((post, i) => (
                   <div key={i} className="my-2 bg-dark">
-                    <div className="d-flex justify-content-between align-items-center p-3">
+                    <div className="p-3">
                       <SocialCard post={post} handleDelete={handleDelete} />
                     </div>
                   </div>

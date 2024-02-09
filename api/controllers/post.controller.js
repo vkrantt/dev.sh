@@ -1,5 +1,6 @@
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
+import List from "../models/list.model.js";
 
 // Create New post
 export async function createPost(req, res) {
@@ -49,6 +50,7 @@ export async function allPosts(req, res) {
       item.createdBy = await User.findById(item.createdBy).select(
         "firstName lastName expertise image"
       );
+      item.list = await List.findById(item.list).select("_id name");
     }
 
     res.status(200).json({
@@ -114,6 +116,7 @@ export async function getPostById(req, res) {
     post.createdBy = await User.findById(post.createdBy).select(
       "-password -links"
     );
+    post.list = await List.findById(post.list).select("_id name");
 
     res.status(200).json({
       status: 200,

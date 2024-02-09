@@ -88,9 +88,12 @@ const SocialCard = ({
                 </div>
               </div>
             )}
-            <Link to={`/detail/${post._id}`}>
+            <Link
+              to={`/detail/${post._id}`}
+              className="link-offset-2 link-underline link-underline-opacity-0 "
+            >
               <h6
-                className={`card-title text-primary ${
+                className={`card-title text-light-blue ${
                   featured ? "fs-md" : "fs-5"
                 }`}
               >
@@ -110,19 +113,31 @@ const SocialCard = ({
                 <span className="mx-2"> · </span>
                 <Button
                   size="sm"
-                  className={`rounded-1 text-primary active ${
-                    featured ? "fs-sm border-1 p-0 px-1" : "border-0"
+                  className={`rounded-1 text-light-blue p-0  ${
+                    featured ? "fs-sm border-1" : "border-0"
                   }`}
-                  variant="outline-primary"
+                  variant="dark"
                 >
                   {capitalizeName(post.tag)}
                 </Button>
+                {post?.list?.name && (
+                  <>
+                    <span className="mx-2"> · </span>
+                    <Button
+                      variant="dark"
+                      size="sm"
+                      className={`rounded-1 p-0`}
+                    >
+                      {capitalizeName(post?.list?.name)}
+                    </Button>
+                  </>
+                )}
                 {pathname === "/view" && (
                   <div className="d-flex align-items-center">
                     <span className="mx-2"> · </span>
                     <Button variant="none" size="sm">
                       <div
-                        className="d-flex align-items-center rounded-1 text-primary active p-2  border-primary border-2 px-3"
+                        className="d-flex align-items-center rounded-1 text-light-blue m-0 p-0 "
                         onClick={() => handleEdit(post)}
                       >
                         <Edit size={15} />
@@ -134,22 +149,25 @@ const SocialCard = ({
                       size="sm"
                       onClick={() => handleDelete(post)}
                     >
-                      <div className="d-flex align-items-center rounded-1 text-primary active p-2  border-primary border-2 px-3">
+                      <div className="d-flex align-items-center rounded-1 text-light-blue m-0 p-0 ">
                         <Trash size={15} />
                       </div>
                     </Button>
                   </div>
                 )}
                 {pathname === "/featured" && handleDelete && (
-                  <Button
-                    variant="none"
-                    size="sm"
-                    onClick={() => handleDelete(post)}
-                  >
-                    <div className="d-flex align-items-center rounded-1 text-primary active p-2  border-primary border-2 px-3">
-                      <Trash size={15} />
-                    </div>
-                  </Button>
+                  <>
+                    <span className="mx-2"> · </span>
+                    <Button
+                      variant="none"
+                      size="sm"
+                      onClick={() => handleDelete(post)}
+                    >
+                      <div className="d-flex p-0 m-0 align-items-center rounded-1 text-light-blue m-0 p-0 ">
+                        <Trash size={15} />
+                      </div>
+                    </Button>
+                  </>
                 )}
               </div>
             </div>

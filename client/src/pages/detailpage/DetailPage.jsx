@@ -251,6 +251,12 @@ const DetailPage = () => {
               <p className="text-secondary">
                 Created on: <i>{formatDate(post.createdAt)}</i>
               </p>
+
+              {post?.list && (
+                <Row className="d-flex justify-content-between mb-2">
+                  <h6 className="text-light-blue">{post?.list?.name}</h6>
+                </Row>
+              )}
             </div>
 
             <Row className="d-flex align-items-center justify-content-between mb-5">

@@ -40,8 +40,8 @@ const Login = ({ handleClose }) => {
       .then((response) => {
         set("dsh_token", response.data.token);
         setLoading(false);
-        window.location.href = "/";
         handleClose();
+        window.location.reload();
       })
       .catch((error) => {
         setErrorMessage(handleError(error));
