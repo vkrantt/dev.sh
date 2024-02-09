@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Nav, Row } from "react-bootstrap";
 import Tags from "../../components/tags/Tags";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { capitalText } from "../../utils/utility";
 import { useEffect } from "react";
 import axios from "axios";
@@ -23,6 +23,8 @@ const Explore = () => {
   let [page, setPage] = useState(1);
   const [itemsRequired] = useState(10);
   const [totalPostsCount, setTotalPostsCount] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
   const loadPost = () => {
     setLoading(true);
@@ -38,6 +40,7 @@ const Explore = () => {
       .then((data) => {
         setPosts((prevPosts) => [...prevPosts, ...data.data.response.posts]);
         setTotalPostsCount(data.data.response.totalCount);
+        setSearchTerm("");
         setLoading(false);
       });
   };
@@ -55,6 +58,36 @@ const Explore = () => {
     loadPost();
   };
 
+  useEffect(() => {
+    if (!searchTerm) setPosts([]);
+    const debounceTimer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 1000);
+
+    return () => {
+      clearTimeout(debounceTimer);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      searchPost();
+    }
+  }, [debouncedSearchTerm]);
+
+  function searchPost() {
+    setLoading(true);
+    axios
+      .get(`${BASE_URL}/post/searchPosts/?query=${debouncedSearchTerm}`)
+      .then((data) => {
+        setPosts(data.data.response);
+        setLoading(false);
+      });
+  }
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <Container>
       <Row className="my-5">
@@ -65,10 +98,27 @@ const Explore = () => {
           <div className="my-2">
             <div>
               <>
-                <Tags className=" me-2 my-2 " />
+                <Tags className=" me-2 my-2 " selected={paramValue} />
+                {paramValue && (
+                  <Button to="/explore" as={Link}>
+                    Clear Filters
+                  </Button>
+                )}
               </>
             </div>
           </div>
+
+          <Form.Group className="mt-5">
+            <h1 className="display-6 fw-bold text-light-blue">Search</h1>
+            <Form.Control
+              name="search"
+              onChange={handleInputChange}
+              value={searchTerm}
+              type="text"
+              placeholder="Search"
+              className=" text-light bg-dark fs-5 border-0 p-3 px-4 rounded-1"
+            />
+          </Form.Group>
         </Col>
 
         {paramValue && (

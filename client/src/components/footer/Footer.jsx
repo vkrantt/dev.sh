@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <Container fluid className="bg-dark">
       <Container className=" d-flex justify-content-between pt-3">
-        <p>V0.0.6</p>
+        <p>V1.0.1</p>
         <p className="d-flex align-items-center">&copy; {year}</p>
         <p>Email</p>
       </Container>

@@ -17,7 +17,13 @@ import Loader from "../../components/loader/Loader";
 import { formatDate } from "../../utils/utility";
 import Usercard from "../../components/userCard/Usercard";
 import "./DetailPage.css";
-import { Heart, MessageCircle, Bookmark, BookmarkCheck } from "lucide-react";
+import {
+  Heart,
+  MessageCircle,
+  Bookmark,
+  BookmarkCheck,
+  Code2,
+} from "lucide-react";
 import { get } from "../../components/handlers/storage";
 import { getUserDetail } from "../../services/user";
 import LoginModal from "../../modals/login/Loginmodal";
@@ -136,7 +142,7 @@ const DetailPage = () => {
       setShowLoginModal(true);
       return;
     }
-    if (!newComment.comment || newComment.comment == "") {
+    if (!newComment.comment || newComment.comment === "") {
       return;
     }
     setCommentLoading(true);
@@ -280,6 +286,18 @@ const DetailPage = () => {
               </div>
 
               <div className="">
+                <a
+                  size="sm"
+                  as={Button}
+                  variant="none"
+                  className="p-0 me-2"
+                  href="https://www.programiz.com/javascript/online-compiler/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Code2 />
+                </a>
+
                 <Button
                   size="sm"
                   variant="none"
@@ -312,7 +330,7 @@ const DetailPage = () => {
               <ListGroup className="mb-3">
                 {comments.map((comment, index) => (
                   <ListGroup.Item
-                    className="border-0 border-bottom border-1"
+                    className="border-0 bg-dark text-light border-bottom border-secondary border-1"
                     key={index}
                   >
                     {/* <strong className="text-blue">

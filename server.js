@@ -30,7 +30,7 @@ server.get("/", (req, res) => {
   res.json({
     status: "ok",
     app: "dev.sh",
-    version: "0.0.5",
+    version: "1.0.1",
   });
 });
 

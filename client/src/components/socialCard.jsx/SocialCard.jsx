@@ -43,22 +43,18 @@ const SocialCard = ({
       {post.list && (
         <div className=" w-100">
           <div
-            className="card border-0 bg-blue list-card-shadow-2"
+            className="card border-0 list-card-color-1 list-card-shadow-2"
             style={{ height: "5px" }}
           ></div>
           <div
-            className="card border-0 bg-blue bg-blue-2  list-card-shadow"
+            className="card border-0 list-card-color-2  list-card-shadow"
             style={{ height: "5px" }}
           ></div>
         </div>
       )}
       <div
         className={`card text-light mb-3 bg-dark rounded-2 w-100 ${
-          featured
-            ? "bg-blue"
-            : ` ${
-                post.list ? "border-0 border-5 border-top border-primary" : ""
-              } bg-light shadow-custom `
+          featured ? "bg-blue" : "bg-light shadow-custom "
         }`}
       >
         {/* Render the login modal */}

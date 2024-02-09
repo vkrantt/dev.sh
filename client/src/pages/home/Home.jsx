@@ -85,7 +85,7 @@ const Home = () => {
             <div className=" mb-5 d-flex justify-content-center">
               <Button
                 onClick={() => handleLoadMore()}
-                className="bg-blue px-3 mt-sm-2 rounded-pill text-primary border-2 border-primary text-primary"
+                className="bg-blue px-3 mt-sm-2 rounded-1 text-primary border-0 text-primary"
               >
                 Show More
               </Button>
