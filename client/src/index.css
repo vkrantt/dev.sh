@@ -100,3 +100,10 @@ code {
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 }
+
+.dropdown-toggle::before {
+  display: none !important;
+}
+.dropdown-toggle::after {
+  display: none !important;
+}

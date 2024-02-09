@@ -19,6 +19,7 @@ import SuperAdminAuthguard from "./routes/SuperAdminAuthguard";
 import Followers from "./pages/user/followers/Followers";
 import Following from "./pages/user/following/Following";
 import Lists from "./pages/lists/Lists";
+import Mobilenav from "./components/mobile/Mobilenav";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -82,6 +83,7 @@ const App = () => {
       </div>
 
       <Footer />
+      <Mobilenav />
     </BrowserRouter>
   );
 };

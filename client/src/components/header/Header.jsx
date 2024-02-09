@@ -2,11 +2,13 @@ import React from "react";
 import "./Header.css";
 import {
   Button,
+  Col,
   Container,
   Nav,
   NavDropdown,
   Navbar,
   Offcanvas,
+  Row,
 } from "react-bootstrap";
 import Logo from "../logo/Logo";
 import { Link, useLocation } from "react-router-dom";
@@ -45,188 +47,157 @@ const Header = () => {
             <Navbar.Brand as={Link} to="/">
               <Logo show={true} />
             </Navbar.Brand>
-            <Navbar.Toggle
-              onClick={() => setShow(!show)}
-              aria-controls="offcanvasNavbar-expand-lg"
-              className="p-0 border-0 shadow-none text-light"
-            />
-            <Navbar.Offcanvas
-              id="offcanvasNavbar-expand-lg"
-              aria-labelledby="offcanvasNavbarLabel-expand-lg"
-              placement="end"
-              show={show}
-              className="me-lg-5"
-              onHide={() => setShow(!show)}
-            >
-              <Offcanvas.Header closeButton variant="dark">
-                <Offcanvas.Title
-                  id="offcanvasNavbarLabel-expand-lg"
-                  className="d-flex align-items-center"
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="d-none d-lg-flex align-items-center justify-content-center flex-lg-grow-1 pe-3">
+                <Nav.Link
+                  as={Link}
+                  className={`d-flex align-items-center  gap-1 ${
+                    pathname === "/"
+                      ? "text-light-blue border-bottom border-2 border-primary"
+                      : ""
+                  }`}
+                  to="/"
                 >
-                  <Logo show={true} />
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body className="d-flex align-items-center flex-lg-row flex-sm-column justify-content-lg-between">
-                <Nav className="d-flex align-items-center justify-content-center flex-lg-grow-1 pe-3">
-                  <Nav.Link
-                    as={Link}
-                    className={`d-flex align-items-center  gap-1 ${
-                      pathname === "/"
-                        ? "text-light-blue border-bottom border-2 border-primary"
-                        : ""
-                    }`}
-                    onClick={() => setShow(false)}
-                    to="/"
-                  >
-                    <Home size={18} /> Home
-                  </Nav.Link>
-                  <Nav.Link
-                    as={Link}
-                    className={`d-flex align-items-center  gap-1  ${
-                      pathname === "/explore"
-                        ? "text-light-blue border-bottom border-2 border-primary"
-                        : ""
-                    }`}
-                    onClick={() => setShow(false)}
-                    to="/explore"
-                  >
-                    <Compass size={18} /> Explore
-                  </Nav.Link>
-                  <Nav.Link
-                    as={Link}
-                    className={`d-flex align-items-center  gap-1  ${
-                      pathname === "/trending"
-                        ? "text-light-blue border-bottom border-2 border-primary"
-                        : ""
-                    }`}
-                    onClick={() => setShow(false)}
-                    to="/trending"
-                  >
-                    <LineChart size={18} /> Trending
-                  </Nav.Link>
-                </Nav>
+                  <Home size={18} /> Home
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  className={`d-flex align-items-center  gap-1  ${
+                    pathname === "/explore"
+                      ? "text-light-blue border-bottom border-2 border-primary"
+                      : ""
+                  }`}
+                  to="/explore"
+                >
+                  <Compass size={18} /> Explore
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  className={`d-flex align-items-center  gap-1  ${
+                    pathname === "/trending"
+                      ? "text-light-blue border-bottom border-2 border-primary"
+                      : ""
+                  }`}
+                  to="/trending"
+                >
+                  <LineChart size={18} /> Trending
+                </Nav.Link>
+              </Nav>
 
-                <div>
-                  {token ? (
-                    <NavDropdown
-                      menuVariant="dark"
-                      drop="down-centered"
-                      title={
-                        <Avatar
-                          round={true}
-                          name={user?.firstName}
-                          src={user?.image}
-                          alt={user?.firstName}
-                          size="30"
-                          style={{ border: "2px solid #9ec5fe" }}
-                        />
-                      }
-                      id={`offcanvasNavbarDropdown-expand-lg`}
+              <div className="d-none d-lg-flex me-5">
+                {token ? (
+                  <NavDropdown
+                    menuVariant="dark"
+                    drop="start"
+                    title={
+                      <Avatar
+                        round={true}
+                        name={user?.firstName}
+                        src={user?.image}
+                        alt={user?.firstName}
+                        size="30"
+                        style={{ border: "2px solid #9ec5fe" }}
+                      />
+                    }
+                    id={`offcanvasNavbarDropdown-expand-lg`}
+                  >
+                    {user?.isAdmin || user?.isSuperAdmin ? (
+                      <>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/write"
+                          className={` ${
+                            pathname === "/write"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          Write New
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/view"
+                          className={` ${
+                            pathname === "/view"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          View
+                        </NavDropdown.Item>
+                      </>
+                    ) : null}
+                    {user?.isSuperAdmin ? (
+                      <>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/featured"
+                          className={` ${
+                            pathname === "/featured"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          Featured
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/lists"
+                          className={` ${
+                            pathname === "/lists"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          Lists
+                        </NavDropdown.Item>
+                      </>
+                    ) : null}
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/profile"
+                      className={` ${
+                        pathname === "/profile"
+                          ? "text-light border-2 border-bottom border-primary"
+                          : ""
+                      }`}
                     >
-                      {user?.isAdmin || user?.isSuperAdmin ? (
-                        <>
-                          <NavDropdown.Item
-                            as={Link}
-                            onClick={() => setShow(false)}
-                            to="/write"
-                            className={` ${
-                              pathname === "/write"
-                                ? "text-light border-2 border-bottom border-primary"
-                                : ""
-                            }`}
-                          >
-                            Write New
-                          </NavDropdown.Item>
-                          <NavDropdown.Item
-                            as={Link}
-                            onClick={() => setShow(false)}
-                            to="/view"
-                            className={` ${
-                              pathname === "/view"
-                                ? "text-light border-2 border-bottom border-primary"
-                                : ""
-                            }`}
-                          >
-                            View
-                          </NavDropdown.Item>
-                        </>
-                      ) : null}
-                      {user?.isSuperAdmin ? (
-                        <>
-                          <NavDropdown.Item
-                            as={Link}
-                            onClick={() => setShow(false)}
-                            to="/featured"
-                            className={` ${
-                              pathname === "/featured"
-                                ? "text-light border-2 border-bottom border-primary"
-                                : ""
-                            }`}
-                          >
-                            Featured
-                          </NavDropdown.Item>
-                          <NavDropdown.Item
-                            as={Link}
-                            onClick={() => setShow(false)}
-                            to="/lists"
-                            className={` ${
-                              pathname === "/lists"
-                                ? "text-light border-2 border-bottom border-primary"
-                                : ""
-                            }`}
-                          >
-                            Lists
-                          </NavDropdown.Item>
-                        </>
-                      ) : null}
-                      <NavDropdown.Item
-                        as={Link}
-                        onClick={() => setShow(false)}
-                        to="/profile"
-                        className={` ${
-                          pathname === "/profile"
-                            ? "text-light border-2 border-bottom border-primary"
-                            : ""
-                        }`}
-                      >
-                        Profile
-                      </NavDropdown.Item>
+                      Profile
+                    </NavDropdown.Item>
 
-                      <NavDropdown.Item
-                        as={Link}
-                        onClick={() => setShow(false)}
-                        to="/saved"
-                        className={` ${
-                          pathname === "/saved"
-                            ? "text-light border-2 border-bottom border-primary"
-                            : ""
-                        }`}
-                      >
-                        Saved
-                      </NavDropdown.Item>
-                      <NavDropdown.Item onClick={() => handleLogout()}>
-                        Logout
-                      </NavDropdown.Item>
-                    </NavDropdown>
-                  ) : (
-                    <div className="mx-2">
-                      <LoginModal
-                        handleShow={showLoginModal}
-                        handleClose={handleCloseLoginModal}
-                      ></LoginModal>
-                      <Button
-                        variant="dark"
-                        size="sm "
-                        onClick={handleShowLoginModal}
-                        className="text-light-blue"
-                      >
-                        Login / Register
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/saved"
+                      className={` ${
+                        pathname === "/saved"
+                          ? "text-light border-2 border-bottom border-primary"
+                          : ""
+                      }`}
+                    >
+                      Saved
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => handleLogout()}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <div className="mx-2">
+                    <LoginModal
+                      handleShow={showLoginModal}
+                      handleClose={handleCloseLoginModal}
+                    ></LoginModal>
+                    <Button
+                      variant="dark"
+                      size="sm "
+                      onClick={handleShowLoginModal}
+                      className="text-light-blue"
+                    >
+                      Login / Register
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       </Container>
