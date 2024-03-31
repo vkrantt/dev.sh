@@ -14,7 +14,6 @@ import { useState } from "react";
 import { getUserDetail } from "./services/user";
 import WriteNew from "./pages/writenew/WriteNew";
 import ViewAll from "./pages/viewall/ViewAll";
-import AdminAuthguard from "./routes/AdminAuthguard";
 import SuperAdminAuthguard from "./routes/SuperAdminAuthguard";
 import Followers from "./pages/user/followers/Followers";
 import Following from "./pages/user/following/Following";
@@ -70,16 +69,9 @@ const App = () => {
 
           <Route
             path="/write"
-            element={
-              <AdminAuthguard children={<WriteNew />} isAdmin={user?.isAdmin} />
-            }
+            element={<Authguard children={<WriteNew />} />}
           />
-          <Route
-            path="/view"
-            element={
-              <AdminAuthguard children={<ViewAll />} isAdmin={user?.isAdmin} />
-            }
-          />
+          <Route path="/view" element={<Authguard children={<ViewAll />} />} />
 
           <Route
             path="/user/followers"

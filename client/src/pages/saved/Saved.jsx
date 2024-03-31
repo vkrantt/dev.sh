@@ -47,7 +47,10 @@ const Saved = () => {
           )}
 
           {!loading && posts.length === 0 && (
-            <Alert variant="primary text-center">
+            <Alert
+              variant="none"
+              className="text-center border-2 border-primary p-1 text-light-blue p-0"
+            >
               You don't have any bookmarks yet.
             </Alert>
           )}

@@ -1,15 +1,6 @@
 import React from "react";
 import "./Header.css";
-import {
-  Button,
-  Col,
-  Container,
-  Nav,
-  NavDropdown,
-  Navbar,
-  Offcanvas,
-  Row,
-} from "react-bootstrap";
+import { Button, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import Logo from "../logo/Logo";
 import { Link, useLocation } from "react-router-dom";
 import LoginModal from "../../modals/login/Loginmodal";
@@ -24,7 +15,6 @@ const Header = () => {
   const [user] = useState(getUserDetail());
   const token = get("dsh_token");
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [show, setShow] = useState(false);
 
   const handleLogout = () => {
     remove("dsh_token");
@@ -101,32 +91,30 @@ const Header = () => {
                     }
                     id={`offcanvasNavbarDropdown-expand-lg`}
                   >
-                    {user?.isAdmin || user?.isSuperAdmin ? (
-                      <>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/write"
-                          className={` ${
-                            pathname === "/write"
-                              ? "text-light border-2 border-bottom border-primary"
-                              : ""
-                          }`}
-                        >
-                          Write New
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          as={Link}
-                          to="/view"
-                          className={` ${
-                            pathname === "/view"
-                              ? "text-light border-2 border-bottom border-primary"
-                              : ""
-                          }`}
-                        >
-                          View
-                        </NavDropdown.Item>
-                      </>
-                    ) : null}
+                    <>
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/write"
+                        className={` ${
+                          pathname === "/write"
+                            ? "text-light border-2 border-bottom border-primary"
+                            : ""
+                        }`}
+                      >
+                        Write New
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/view"
+                        className={` ${
+                          pathname === "/view"
+                            ? "text-light border-2 border-bottom border-primary"
+                            : ""
+                        }`}
+                      >
+                        View
+                      </NavDropdown.Item>
+                    </>
                     {user?.isSuperAdmin ? (
                       <>
                         <NavDropdown.Item
