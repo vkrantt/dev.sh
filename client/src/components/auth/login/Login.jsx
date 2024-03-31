@@ -55,53 +55,52 @@ const Login = ({ handleClose }) => {
           <AlertCircle /> {errorMessage}
         </div>
       )}
-      <FloatingLabel
-        controlId="floatingInput"
-        label="Email address"
-        className="mb-3 text-dark"
-      >
-        <Form.Control
-          type="email"
-          placeholder="name@example.com"
-          className="border-2 rounded-3 shadow-none text-dark"
-          name="email"
-          onChange={handleChange}
-          value={credentials.email}
-        />
-      </FloatingLabel>
-      <div className="position-relative">
-        <FloatingLabel
-          controlId="floatingPassword"
-          label="Password"
-          className=" text-dark"
-        >
-          <Form.Control
-            type={show ? "text" : "password"}
-            placeholder="Password"
-            className="border-2 rounded-3 shadow-none text-dark"
-            name="password"
-            onChange={handleChange}
-            value={credentials.password}
-          />
-        </FloatingLabel>
 
-        <div className="position-absolute top-0 end-0 mt-3 ">
-          <Button size="sm" variant="none" onClick={() => setShow(!show)}>
-            {show ? "Hide" : "Show"}
+      <Form>
+        <Form.Group className="mb-2" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+            placeholder="name@example.com"
+            type="email"
+            name="email"
+            autoComplete
+            onChange={handleChange}
+            value={credentials.email}
+          />
+        </Form.Group>
+
+        <div className="position-relative">
+          <Form.Group className="mb-2" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+              type={show ? "text" : "password"}
+              placeholder="Password"
+              name="password"
+              autoComplete
+              onChange={handleChange}
+              value={credentials.password}
+            />
+          </Form.Group>
+          <div className="position-absolute top-0 end-0">
+            <Button size="sm" variant="dark" onClick={() => setShow(!show)}>
+              {show ? "Hide" : "Show"}
+            </Button>
+          </div>
+        </div>
+
+        <div className="mt-3">
+          <Button
+            variant="none"
+            className="fs-5 bg-black rounded-3 text-light-blue w-100 border-primary border-2"
+            onClick={handleSubmit}
+            type="submit"
+          >
+            {loading ? <Loader /> : "Log In"}
           </Button>
         </div>
-      </div>
-
-      <div className="mt-3">
-        <Button
-          variant="primary"
-          className="w-100 bg-blue border-2 rounded-3 text-primary"
-          onClick={handleSubmit}
-          type="submit"
-        >
-          {loading ? <Loader /> : "Log In"}
-        </Button>
-      </div>
+      </Form>
     </>
   );
 };

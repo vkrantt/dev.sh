@@ -11,6 +11,10 @@ import {
 } from "../../utils/utility";
 import { getUserDetail } from "../../services/user";
 import LoginModal from "../../modals/login/Loginmodal";
+import axios from "axios";
+import { BASE_URL } from "../../config/config";
+import { get } from "../handlers/storage";
+import Loader from "../loader/Loader";
 
 const SocialCard = ({
   featured,
@@ -22,6 +26,7 @@ const SocialCard = ({
   const [loggedInUser] = useState(getUserDetail());
   // If user is not logged in
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isApproveLoader, setIsApproveLoader] = useState(false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -36,6 +41,25 @@ const SocialCard = ({
   // if user is not logged in
   const handleCloseLoginModal = () => {
     setShowLoginModal(false);
+  };
+
+  const handleApprove = (postId) => {
+    setIsApproveLoader(true);
+    axios
+      .post(
+        `${BASE_URL}/post/approve-post/${postId}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/type",
+            Authorization: `Bearer ${get("dsh_token")}`,
+          },
+        }
+      )
+      .then(() => {
+        setIsApproveLoader(false);
+        alert("Post Approved.");
+      });
   };
 
   return (
@@ -75,16 +99,29 @@ const SocialCard = ({
                   name={post.createdBy.firstName}
                   src={post.createdBy.image}
                 />
-                <div className="mx-2 ">
+                <div className="mx-2 d-flex">
                   <span className="">
                     {capitalizeName(post.createdBy.firstName)}{" "}
                     {capitalizeName(post.createdBy.lastName)}
                   </span>{" "}
                   {post.createdBy.expertise && (
-                    <span className="">
+                    <span className="mx-1">
                       in <span>{post.createdBy.expertise}</span>
                     </span>
                   )}
+                  {pathname === "/view-all-posts" &&
+                    loggedInUser.isSuperAdmin &&
+                    !post.isDeleted &&
+                    !post.approved && (
+                      <span className="mx-2 d-flex align-items-center">
+                        <button
+                          onClick={() => handleApprove(post._id)}
+                          className="p-0 px-2 bg-black rounded-3 text-light-blue border-primary border-2"
+                        >
+                          {isApproveLoader ? <Loader /> : "APPROVE"}
+                        </button>
+                      </span>
+                    )}
                 </div>
               </div>
             )}
@@ -132,7 +169,7 @@ const SocialCard = ({
                     </Button>
                   </>
                 )}
-                {pathname === "/view" && (
+                {(pathname === "/view" || pathname === "/view-all-posts") && (
                   <div className="d-flex align-items-center">
                     <span className="mx-2"> · </span>
                     <Button variant="none" size="sm">
@@ -153,6 +190,40 @@ const SocialCard = ({
                         <Trash size={15} />
                       </div>
                     </Button>
+                  </div>
+                )}
+                {(pathname === "/view-all-posts" || pathname === "/view") && (
+                  <div className="d-flex">
+                    {post.shared && (
+                      <>
+                        <span className="mx-2"> · </span>
+                        <div className="bg-info px-2 rounded-pill">Shared</div>
+                      </>
+                    )}
+                    {!post.approved && (
+                      <>
+                        <span className="mx-2"> · </span>
+                        <div className="bg-warning px-2 rounded-pill">
+                          Pending
+                        </div>
+                      </>
+                    )}
+                    {post.approved && (
+                      <>
+                        <span className="mx-2"> · </span>
+                        <div className="bg-success px-2 rounded-pill">
+                          Approved
+                        </div>
+                      </>
+                    )}
+                    {post.isDeleted && (
+                      <>
+                        <span className="mx-2"> · </span>
+                        <div className="bg-danger px-2 rounded-pill">
+                          Deleted
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
                 {pathname === "/featured" && handleDelete && (

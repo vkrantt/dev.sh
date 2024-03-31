@@ -247,7 +247,9 @@ const DetailPage = () => {
         <Row>
           <Col lg="8" className="m-auto">
             <div>
-              <h1 className="text-primary fw-bold display-6">{post.title}</h1>
+              <h1 className="text-light-blue fw-bold display-6">
+                {post.title}
+              </h1>
               <p className="text-secondary">
                 Created on: <i>{formatDate(post.createdAt)}</i>
               </p>
@@ -374,9 +376,9 @@ const DetailPage = () => {
                   />
                 </Form.Group>
                 <Button
-                  variant="primary"
+                  variant="none"
                   size="sm"
-                  className="mt-2 shadow-none bg-blue border-2 rounded-1 text-primary"
+                  className="fs-5 p-0 px-2 bg-black rounded-3 text-light-blue mt-3 border-primary border-2"
                   onClick={handleAddComment}
                 >
                   {commentLoading ? <Loader /> : "Add Comment"}

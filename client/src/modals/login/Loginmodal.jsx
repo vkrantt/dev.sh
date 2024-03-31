@@ -10,10 +10,10 @@ const LoginModal = ({ handleShow, handleClose }) => {
   return (
     <>
       <Modal show={handleShow} onHide={handleClose}>
-        <Modal.Body className="bg-light rounded-1">
+        <Modal.Body className="bg-dark">
           <>
             <div className="mb-2">
-              <Logo show className="text-dark fs-4" />
+              <Logo show className="text-light fs-4" />
             </div>
             {isLogin ? (
               <Login handleClose={handleClose} />

@@ -41,7 +41,11 @@ const postShchema = mongoose.Schema(
     ],
     shared: {
       type: Boolean,
-      default: true,
+      default: false,
+    },
+    approved: {
+      type: Boolean,
+      default: false,
     },
     isDeleted: {
       type: Boolean,

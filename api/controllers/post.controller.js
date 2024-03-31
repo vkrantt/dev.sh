@@ -38,7 +38,46 @@ export async function allPosts(req, res) {
     const pageSize = parseInt(req.query.pageSize) || 10;
     const skip = (page - 1) * pageSize;
 
-    const query = { shared: true, isDeleted: false };
+    const query = { approved: true, shared: true, isDeleted: false };
+
+    const [posts, totalCount] = await Promise.all([
+      Post.find(query).sort({ createdAt: -1 }).skip(skip).limit(pageSize),
+      Post.countDocuments(query),
+    ]);
+
+    for (let i = 0; i < posts.length; i++) {
+      const item = posts[i];
+      item.createdBy = await User.findById(item.createdBy).select(
+        "firstName lastName expertise image"
+      );
+      item.list = await List.findById(item.list).select("_id name");
+    }
+
+    res.status(200).json({
+      status: 200,
+      response: {
+        posts,
+        totalCount,
+        page,
+        pageSize,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+// View all posts
+export async function viewAllPosts(req, res) {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+
+    const query = {};
 
     const [posts, totalCount] = await Promise.all([
       Post.find(query).sort({ createdAt: -1 }).skip(skip).limit(pageSize),
@@ -513,6 +552,26 @@ export async function getFilteredPostsByTag(req, res) {
         page,
         pageSize,
       },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Server error",
+      response: error,
+    });
+  }
+}
+
+export async function approvePost(req, res) {
+  const { id } = req.params;
+  try {
+    await Post.findByIdAndUpdate(
+      id,
+      { $set: { approved: true } },
+      { new: true }
+    );
+    res.status(200).json({
+      status: "ok",
+      response: "Post approved.",
     });
   } catch (error) {
     res.status(500).json({

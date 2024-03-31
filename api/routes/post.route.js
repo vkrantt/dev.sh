@@ -17,6 +17,8 @@ import {
   addFeaturedPost,
   deleteFeaturedPost,
   getFilteredPostsByTag,
+  viewAllPosts,
+  approvePost,
 } from "../controllers/post.controller.js";
 import { authguard } from "../middlewares/verifytoken.js";
 
@@ -31,6 +33,8 @@ router.route("/getPostDetailsById/:id").get(getPostById);
 router.route("/updatePost/:id").post(authguard, updatePost);
 router.route("/deletePost/:id").delete(authguard, deletePost);
 router.route("/trendings").get(trendings);
+router.route("/view-all-posts").get(viewAllPosts);
+router.route("/approve-post/:id").post(approvePost);
 
 // Bookmarks
 router.route("/save-bookmark/:postId").post(authguard, saveBookmark);

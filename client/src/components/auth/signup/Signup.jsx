@@ -1,7 +1,8 @@
 import React from "react";
 import { useRef } from "react";
-import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
-import userProfile from "../../../assets/userprofile.png";
+import { Button, Col, Form, Row } from "react-bootstrap";
+// import userProfile from "../../../assets/userprofile.png";
+import userProfileDark from "../../../assets/userprofiledark.png";
 import { useState } from "react";
 import { AlertCircle, X } from "lucide-react";
 import Loader from "../../loader/Loader";
@@ -125,9 +126,11 @@ const Signup = ({ handleClose }) => {
           className="d-flex justify-content-center align-itemx-center mb-3 position-relative"
         >
           <img
-            src={rawImage ? URL.createObjectURL(rawImage) : userProfile}
+            src={rawImage ? URL.createObjectURL(rawImage) : userProfileDark}
             alt=""
-            className="rounded-circle border border-3 border-primary"
+            className={`rounded-circle border border-3 ${
+              rawImage ? "border-success" : "border-primary"
+            }`}
             style={{ width: "100px", height: "100px", objectFit: "cover" }}
           />
           <input
@@ -139,10 +142,10 @@ const Signup = ({ handleClose }) => {
         </div>
         {rawImage && (
           <Button
-            variant="none"
+            variant="dark"
             size="sm"
             onClick={() => handleRemoveImage()}
-            className="position-absolute top-0 start-50 border-primary rounded-circle border-2 mx-4 bg-light p-0 m-0 "
+            className="position-absolute top-0 start-50 mt-4 rounded-pill"
           >
             <X />
           </Button>
@@ -156,84 +159,90 @@ const Signup = ({ handleClose }) => {
         </div>
       )}
 
-      <Row>
-        <Col lg="6">
-          <FloatingLabel label="First Name" className="mb-3 text-dark">
-            <Form.Control
-              type="text"
-              placeholder="First Name"
-              className="border-2 rounded-3 shadow-none text-dark"
-              name="firstName"
-              onChange={handleChange}
-              value={credentials.firstName}
-            />
-          </FloatingLabel>
-        </Col>
-        <Col lg="6">
-          <FloatingLabel label="Last Name" className="mb-3 text-dark">
-            <Form.Control
-              type="text"
-              placeholder="Last Name"
-              className="border-2 rounded-3 shadow-none text-dark"
-              name="lastName"
-              onChange={handleChange}
-              value={credentials.lastName}
-            />
-          </FloatingLabel>
-        </Col>
-      </Row>
+      <Form>
+        <Row>
+          <Col lg="6">
+            <Form.Group className="mb-2">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+                type="text"
+                placeholder="First Name"
+                name="firstName"
+                onChange={handleChange}
+                value={credentials.firstName}
+              />
+            </Form.Group>
+          </Col>
+          <Col lg="6">
+            <Form.Group className="mb-2">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+                type="text"
+                placeholder="Last Name"
+                name="lastName"
+                onChange={handleChange}
+                value={credentials.lastName}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-      {/* Email */}
-      <FloatingLabel label="Email address" className="mb-3 text-dark">
-        <Form.Control
-          type="email"
-          placeholder="name@example.com"
-          className="border-2 rounded-3 shadow-none text-dark"
-          name="email"
-          onChange={handleChange}
-          value={credentials.email}
-        />
-      </FloatingLabel>
-
-      {/* password */}
-      <div className="position-relative">
-        <FloatingLabel label="Password" className="mb-3 text-dark">
+        {/* Email */}
+        <Form.Group className="mb-2">
+          <Form.Label>Email Adderss</Form.Label>
           <Form.Control
-            type={show ? "text" : "password"}
-            placeholder="Password"
-            className="border-2 rounded-3 shadow-none text-dark"
-            name="password"
+            className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+            type="email"
+            placeholder="name@example.com"
+            name="email"
             onChange={handleChange}
-            value={credentials.password}
+            value={credentials.email}
           />
-        </FloatingLabel>
+        </Form.Group>
+        {/* password */}
+        <div className="position-relative">
+          <Form.Group className="mb-2">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+              type={show ? "text" : "password"}
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+              value={credentials.password}
+            />
+          </Form.Group>
 
-        <FloatingLabel label="Confirm Password" className="mb-3 text-dark">
-          <Form.Control
-            type={show ? "text" : "password"}
-            placeholder="Confirm Password"
-            className="border-2 rounded-3 shadow-none text-dark"
-            name="confirmPassword"
-            onChange={handleChange}
-            value={credentials.confirmPassword}
-          />
-        </FloatingLabel>
+          <Form.Group className="mb-2">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              className="bg-black fs-5 border-0 shadow-none login-form-placeholder text-light"
+              type={show ? "text" : "password"}
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              onChange={handleChange}
+              value={credentials.confirmPassword}
+            />
+          </Form.Group>
 
-        <div className="position-absolute top-0 end-0 mt-3 ">
-          <Button size="sm" variant="none" onClick={() => setShow(!show)}>
-            {show ? "Hide" : "Show"}
-          </Button>
+          <div className="position-absolute top-0 end-0 ">
+            <Button size="sm" variant="dark" onClick={() => setShow(!show)}>
+              {show ? "Hide" : "Show"}
+            </Button>
+          </div>
         </div>
-      </div>
+      </Form>
 
       <div className="mt-3">
         <Button
-          variant="primary"
-          className="w-100 bg-blue border-2 rounded-1 text-primary"
+          variant="none"
+          className="fs-5 bg-black rounded-3 text-light-blue w-100 border-primary border-2"
           type="submit"
           onClick={handleSubmit}
         >
-          {loading ? <Loader /> : "Sign In"}
+          {loading ? <Loader /> : "Create account"}
         </Button>
       </div>
     </>

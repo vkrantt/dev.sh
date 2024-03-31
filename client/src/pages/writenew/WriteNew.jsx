@@ -320,7 +320,13 @@ const WriteNew = () => {
               onClick={handleSubmit}
               disabled={!form.title}
             >
-              {loading ? <Loader /> : postId ? "Update Post" : "Write Post"}
+              {loading ? (
+                <Loader variant="light" />
+              ) : postId ? (
+                "Update Post"
+              ) : (
+                "Write Post"
+              )}
             </Button>
           </Form>
         </Col>

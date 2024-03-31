@@ -152,7 +152,7 @@ const Explore = () => {
 
           {paramValue && !loading && totalPostsCount === 0 && (
             <div className="text-center">
-              <h6 className=" fw-bold text-danger">No results found</h6>
+              <h6 className="text-danger my-5">No results found</h6>
             </div>
           )}
         </Col>

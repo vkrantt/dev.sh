@@ -20,6 +20,7 @@ import Followers from "./pages/user/followers/Followers";
 import Following from "./pages/user/following/Following";
 import Lists from "./pages/lists/Lists";
 import Mobilenav from "./components/mobile/Mobilenav";
+import ViewAllPosts from "./pages/view-all-posts/ViewAllPosts";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -54,6 +55,16 @@ const App = () => {
               />
             }
           />
+          <Route
+            path="/view-all-posts"
+            element={
+              <SuperAdminAuthguard
+                children={<ViewAllPosts />}
+                isSuperAdmin={user?.isSuperAdmin}
+              />
+            }
+          />
+
           <Route path="/saved" element={<Authguard children={<Saved />} />} />
           <Route path="/detail/:id" element={<DetailPage />} />
 

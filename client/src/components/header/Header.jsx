@@ -80,7 +80,7 @@ const Header = () => {
                   }`}
                   to="/trending"
                 >
-                  <LineChart size={18} /> Trending
+                  <LineChart size={18} /> Trendings
                 </Nav.Link>
               </Nav>
 
@@ -150,6 +150,17 @@ const Header = () => {
                           }`}
                         >
                           Lists
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/view-all-posts"
+                          className={` ${
+                            pathname === "/view-all-posts"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          View All Posts
                         </NavDropdown.Item>
                       </>
                     ) : null}

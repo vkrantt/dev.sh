@@ -98,9 +98,10 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
 
       {loggedInUser?.id !== user?._id && showFollowBtn && (
         <Button
+          variant="none"
           size="sm"
           onClick={() => handleFollow(user._id)}
-          className="bg-blue rounded-1 px-4 text-primary mx-4"
+          className="fs-5 p-0 px-2 bg-black rounded-3 text-light-blue mx-3 border-primary border-2"
         >
           {loading ? <Loader /> : follow ? "Following" : "Follow"}
         </Button>

@@ -14,8 +14,8 @@ const Tags = ({ className, selected }) => {
           className={`rounded-3 btn-sm  p-2  me-2 my-2  border-2  px-3 shadow-xs ${className} 
           ${
             selected === tag.value
-              ? "bg-blue text-primary"
-              : "text-light active tagsLink bg-secondary border-secondary"
+              ? "bg-dark text-light-blue border-primary"
+              : "text-light active tagsLink bg-dark border-secondary"
           }`}
           variant="light"
         >

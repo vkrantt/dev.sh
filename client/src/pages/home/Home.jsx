@@ -23,7 +23,7 @@ const Home = () => {
     axios
       .get(`${BASE_URL}/post?page=${page}&pageSize=${itemsRequired}`)
       .then((response) => {
-        setPosts([...posts, ...response.data.response.posts]);
+        setPosts((prev) => [...prev, ...response.data.response.posts]);
         setTotalPostsCount(response.data.response.totalCount);
         setLoading(false);
       })
@@ -36,8 +36,7 @@ const Home = () => {
   }, [page]);
 
   const handleLoadMore = () => {
-    setPage(++page);
-    loadPosts();
+    setPage(page + 1);
   };
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const Home = () => {
 
           <div className="mb-2">
             Showing:
-            <b>
+            <b className="mx-2">
               1-{posts.length}/{totalPostsCount}
             </b>
           </div>
@@ -84,8 +83,9 @@ const Home = () => {
           {totalPostsCount !== posts.length && !loading && (
             <div className=" mb-5 d-flex justify-content-center">
               <Button
+                variant="none"
                 onClick={() => handleLoadMore()}
-                className="bg-blue px-3 mt-sm-2 rounded-1 text-primary border-0 text-primary"
+                className="fs-5 p-0 px-2 bg-black rounded-3 text-light-blue border-primary border-2"
               >
                 Show More
               </Button>
