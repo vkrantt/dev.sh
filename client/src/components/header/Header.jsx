@@ -148,7 +148,7 @@ const Header = () => {
                               : ""
                           }`}
                         >
-                          View All Posts
+                          View all posts
                         </NavDropdown.Item>
                       </>
                     ) : null}

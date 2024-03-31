@@ -90,32 +90,31 @@ const Mobilenav = () => {
                       }
                       id={`offcanvasNavbarDropdown-expand-lg`}
                     >
-                      {user?.isAdmin || user?.isSuperAdmin ? (
-                        <>
-                          <NavDropdown.Item
-                            as={Link}
-                            to="/write"
-                            className={` ${
-                              pathname === "/write"
-                                ? "text-light border-2 border-bottom border-primary"
-                                : ""
-                            }`}
-                          >
-                            Write New
-                          </NavDropdown.Item>
-                          <NavDropdown.Item
-                            as={Link}
-                            to="/view"
-                            className={` ${
-                              pathname === "/view"
-                                ? "text-light border-2 border-bottom border-primary"
-                                : ""
-                            }`}
-                          >
-                            View
-                          </NavDropdown.Item>
-                        </>
-                      ) : null}
+                      <>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/write"
+                          className={` ${
+                            pathname === "/write"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          Write New
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                          as={Link}
+                          to="/view"
+                          className={` ${
+                            pathname === "/view"
+                              ? "text-light border-2 border-bottom border-primary"
+                              : ""
+                          }`}
+                        >
+                          View
+                        </NavDropdown.Item>
+                      </>
+
                       {user?.isSuperAdmin ? (
                         <>
                           <NavDropdown.Item
@@ -139,6 +138,17 @@ const Mobilenav = () => {
                             }`}
                           >
                             Lists
+                          </NavDropdown.Item>
+                          <NavDropdown.Item
+                            as={Link}
+                            to="/view-all-posts"
+                            className={` ${
+                              pathname === "/view-all-posts"
+                                ? "text-light border-2 border-bottom border-primary"
+                                : ""
+                            }`}
+                          >
+                            View all posts
                           </NavDropdown.Item>
                         </>
                       ) : null}
