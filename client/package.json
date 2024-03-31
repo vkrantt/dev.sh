@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -19,6 +19,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "v-minor": "npm version minor",
+    "v-patch": "npm version patch",
+    "v-major": "npm version major",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

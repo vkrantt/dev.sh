@@ -1,6 +1,6 @@
 {
   "name": "kienote",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A blog website for developers",
   "type": "module",
   "main": "server.js",
