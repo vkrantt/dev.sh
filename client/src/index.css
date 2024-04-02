@@ -111,3 +111,7 @@ code {
 .login-form-placeholder::placeholder {
   color: #cdebff6d !important;
 }
+
+.text-red {
+  color: red !important;
+}

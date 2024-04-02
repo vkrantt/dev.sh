@@ -11,7 +11,7 @@ const Tags = ({ className, selected }) => {
           as={Link}
           key={tag.key}
           to={`/explore?q=${tag.value}`}
-          className={`rounded-3 btn-sm  p-2  me-2 my-2  border-2  px-3 shadow-xs ${className} 
+          className={`rounded-3 btn-sm p-2 me-2 my-2 border-2 px-3 shadow-xs ${className} 
           ${
             selected === tag.value
               ? "bg-dark text-light-blue border-primary"

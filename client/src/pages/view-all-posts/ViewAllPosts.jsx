@@ -16,7 +16,7 @@ const ViewAllPosts = () => {
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   let [page, setPage] = useState(1);
-  const [itemsRequired] = useState(10);
+  const [itemsRequired] = useState(5);
   const [totalPostsCount, setTotalPostsCount] = useState(0);
 
   const handleDelete = (post) => {
@@ -25,8 +25,6 @@ const ViewAllPosts = () => {
     );
     if (confirmation) {
       setIsDeleteLoading(true);
-      //   const filteredNotes = posts.filter((item) => item._id !== post._id);
-      //   setPosts(filteredNotes);
       axios
         .delete(`${BASE_URL}/post/deletePost/${post._id}`, {
           headers: {
@@ -84,7 +82,7 @@ const ViewAllPosts = () => {
           {/* Render alert modal */}
 
           <h1 className="display-4 fw-bold text-light-blue my-3">
-            View All Posts [{posts.length || 0}]
+            View All Posts [{totalPostsCount || 0}]
           </h1>
 
           {posts.map((post) => (

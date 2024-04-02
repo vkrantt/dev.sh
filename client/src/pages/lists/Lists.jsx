@@ -202,12 +202,12 @@ const Lists = () => {
                     key={i}
                     className="d-flex bg-dark border-0 border-2 border-secondary rounded-0 border-bottom text-light align-items-center justify-content-between"
                   >
-                    <h6>{list.name}</h6>
+                    <h6 className="text-light-blue">{list.name}</h6>
 
                     <div className="d-flex gap-1">
                       <Button
-                        variant="secondary"
-                        className="d-flex justify-content-center align-items-center"
+                        variant="none"
+                        className="bg-black rounded-3 text-light-blue w-100 border-primary border-2"
                         type="button"
                         size="sm"
                         onClick={() => handleEdit(list)}
@@ -216,7 +216,7 @@ const Lists = () => {
                       </Button>
                       <Button
                         variant="danger"
-                        className="d-flex justify-content-center align-items-center"
+                        className="bg-black rounded-3 text-muted-danger w-100 border-danger border-2"
                         type="button"
                         size="sm"
                         onClick={() => handleDelete(list)}

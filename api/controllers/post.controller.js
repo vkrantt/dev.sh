@@ -112,8 +112,16 @@ export async function viewAllPosts(req, res) {
 // Get loggedIn users posts
 export async function getLoggedInUsersPosts(req, res) {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+
     const query = { createdBy: req.user._id, isDeleted: false };
-    const posts = await Post.find(query).sort({ _id: -1 });
+
+    const [posts, totalCount] = await Promise.all([
+      Post.find(query).sort({ _id: -1 }).skip(skip).limit(pageSize),
+      Post.countDocuments(query),
+    ]);
 
     for (let i = 0; i < posts.length; i++) {
       const item = posts[i];
@@ -124,7 +132,12 @@ export async function getLoggedInUsersPosts(req, res) {
 
     res.status(200).json({
       status: 200,
-      response: posts,
+      response: {
+        posts,
+        totalCount,
+        page,
+        pageSize,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -262,7 +275,7 @@ export async function updatePost(req, res) {
         { new: true }
       );
     }
-
+    req.body.approved = false;
     await Post.findByIdAndUpdate(postId, { $set: req.body }, { new: true });
     res.status(200).json({
       status: "ok",
@@ -427,7 +440,7 @@ export async function searchPost(req, res) {
             { description: { $regex: query, $options: "i" } }, // Case-insensitive content search
           ],
         },
-        { shared: true, isDeleted: false },
+        { approved: true, shared: true, isDeleted: false },
       ],
     }).limit(10);
     for (let i = 0; i < searchResults.length; i++) {
@@ -514,7 +527,10 @@ export async function getFilteredPostsByTag(req, res) {
   const tagsArray = tags.split(",");
   try {
     const totalCount = await Post.countDocuments({
-      $and: [{ tag: { $in: tagsArray } }, { shared: true, isDeleted: false }],
+      $and: [
+        { tag: { $in: tagsArray } },
+        { approved: true, shared: true, isDeleted: false },
+      ],
     });
 
     const totalPages = Math.ceil(totalCount / pageSize);
@@ -525,7 +541,10 @@ export async function getFilteredPostsByTag(req, res) {
     if (totalCount > 0) {
       const skip = (currentPage - 1) * pageSize;
       filteredPosts = await Post.find({
-        $and: [{ tag: { $in: tagsArray } }, { shared: true, isDeleted: false }],
+        $and: [
+          { tag: { $in: tagsArray } },
+          { approved: true, shared: true, isDeleted: false },
+        ],
       })
         .skip(skip)
         .limit(pageSize);

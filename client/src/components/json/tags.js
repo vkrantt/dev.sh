@@ -4,6 +4,10 @@ export const tags = [
     value: "programming",
   },
   {
+    key: "Coding",
+    value: "coding",
+  },
+  {
     key: "Data Science",
     value: "data science",
   },

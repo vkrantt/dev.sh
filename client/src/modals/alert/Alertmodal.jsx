@@ -1,22 +1,32 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import { Check } from "lucide-react";
 
-const Alertmodal = ({ handleShow, message, setShowAlertModal }) => {
+const Alertmodal = ({ handleShow, message, setShowAlertModal, icon }) => {
   const handleClose = () => {
     setShowAlertModal(false);
   };
   return (
     <>
       <Modal size="sm" centered show={handleShow} onHide={handleClose}>
-        <Modal.Body className="bg-blue rounded-3">
-          <center>
-            <div className="fs-5 fw-bold text-muted mb-2">{message}</div>
+        <Modal.Body className="bg-blue rounded-2">
+          <center className="">
+            {icon ? (
+              icon
+            ) : (
+              <Check
+                size={50}
+                color="var(--blue)"
+                style={{ marginBottom: "20px" }}
+              />
+            )}
+            <div className="fs-5 mb-4 text-black">{message}</div>
             <Button
               type="button"
-              className="bg-blue p-0 py-1 px-4 mt-sm-2 rounded-pill text-primary border-2 border-primary text-primary"
+              className="fs-5 p-0 bg-black rounded-3 text-light-blue w-50 border-primary border-2"
               onClick={handleClose}
             >
-              OK
+              Dismiss
             </Button>
           </center>
         </Modal.Body>

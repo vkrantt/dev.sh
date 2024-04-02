@@ -114,12 +114,13 @@ const SocialCard = ({
                     !post.isDeleted &&
                     !post.approved && (
                       <span className="mx-2 d-flex align-items-center">
-                        <button
+                        <Button
+                          type="button"
                           onClick={() => handleApprove(post._id)}
                           className="p-0 px-2 bg-black rounded-3 text-light-blue border-primary border-2"
                         >
                           {isApproveLoader ? <Loader /> : "APPROVE"}
-                        </button>
+                        </Button>
                       </span>
                     )}
                 </div>
@@ -143,7 +144,7 @@ const SocialCard = ({
               </div>
             )}
             <div className="d-flex justify-content-between mt-2">
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center flex-wrap gap-2">
                 <span style={{ fontSize: "12px" }}>
                   {formatDate(post.createdAt)}{" "}
                 </span>{" "}

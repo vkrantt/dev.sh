@@ -69,7 +69,7 @@ const Usercard = ({ user, date, showFollowBtn = true }) => {
           src={user?.image}
           value="86%"
           size="30"
-          className="me-3 border border-primary"
+          className="me-3"
         />
 
         <div>

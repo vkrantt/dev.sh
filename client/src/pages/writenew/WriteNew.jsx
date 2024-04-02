@@ -5,7 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./WriteNew.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { BASE_URL } from "../../config/config";
+import { BASE_URL, toastConfig } from "../../config/config";
 import axios from "axios";
 import { get } from "../../components/handlers/storage";
 import { useEffect } from "react";
@@ -13,6 +13,8 @@ import Loader from "../../components/loader/Loader";
 import Alertmodal from "../../modals/alert/Alertmodal";
 import { tags } from "../../components/json/tags";
 import { handleError } from "../../components/handlers/ErrorHandler";
+import toast, { Toaster } from "react-hot-toast";
+import { X } from "lucide-react";
 
 const WriteNew = () => {
   const [searchParams] = useSearchParams();
@@ -184,10 +186,9 @@ const WriteNew = () => {
     e.preventDefault();
     const editorContent = quillRef.current.value;
     form.description = editorContent;
-
-    if (!form.title || !form.description || !form.tag) {
+    if (!form.title || !form.description || !form.tag || !value) {
       setShowAlertModal(true);
-      setAlertMessage("Please fill all the fields");
+      setAlertMessage("Please fill all the required fields");
       return;
     }
     if (form.list === "") delete form.list;
@@ -206,9 +207,24 @@ const WriteNew = () => {
           setLoading(false);
           setTimeout(() => {
             if (postFromId?._id) {
-              navigate("/view");
+              toast.success(
+                "Post updated, Please wait for the approval.",
+                toastConfig
+              );
             } else {
-              navigate("/");
+              setForm({
+                title: "",
+                description: "",
+                tag: "",
+                shared: false,
+                list: "",
+              });
+              setValue("");
+              quillRef.current.value = "";
+              toast.success(
+                "Post submitted, Please wait for the approval.",
+                toastConfig
+              );
             }
           }, 500);
         }
@@ -226,6 +242,7 @@ const WriteNew = () => {
         message={alertMessage}
         handleShow={showAlertModal}
         setShowAlertModal={setShowAlertModal}
+        icon={<X size={50} color="red" style={{ marginBottom: "20px" }} />}
       ></Alertmodal>
 
       <Row>
@@ -237,7 +254,9 @@ const WriteNew = () => {
               </h1>
             </Row>
             <Row className="mb-3">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>
+                Title <span className="text-danger">*</span>
+              </Form.Label>
               <Form.Group as={Col}>
                 <Form.Control
                   type="text"
@@ -251,7 +270,9 @@ const WriteNew = () => {
 
             <Row>
               <Col lg="6">
-                <Form.Label>Tags</Form.Label>
+                <Form.Label>
+                  Tags <span className="text-danger">*</span>{" "}
+                </Form.Label>
                 <Row className="mb-3 mx-0">
                   <Form.Select
                     as={Col}
@@ -291,7 +312,9 @@ const WriteNew = () => {
             </Row>
 
             <div>
-              <Form.Label>Description</Form.Label>
+              <Form.Label>
+                Description <span className="text-danger">*</span>
+              </Form.Label>
               <ReactQuill
                 ref={quillRef}
                 value={value}
@@ -331,6 +354,7 @@ const WriteNew = () => {
           </Form>
         </Col>
       </Row>
+      <Toaster />
     </Container>
   );
 };

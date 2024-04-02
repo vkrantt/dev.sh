@@ -86,7 +86,6 @@ const Header = () => {
                         src={user?.image}
                         alt={user?.firstName}
                         size="30"
-                        style={{ border: "2px solid #9ec5fe" }}
                       />
                     }
                     id={`offcanvasNavbarDropdown-expand-lg`}

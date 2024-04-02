@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import SocialCard from "../../components/socialCard.jsx/SocialCard";
 import { useEffect } from "react";
 import axios from "axios";
@@ -15,21 +15,36 @@ const ViewAll = () => {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  let [page, setPage] = useState(1);
+  const [itemsRequired] = useState(5);
+  const [totalPostsCount, setTotalPostsCount] = useState(0);
 
-  useEffect(() => {
+  function loadPosts() {
     setLoading(true);
     axios
-      .get(`${BASE_URL}/post/getPostsByUser`, {
-        headers: {
-          "Content-Type": "application/type",
-          Authorization: `Bearer ${get("dsh_token")}`,
-        },
-      })
-      .then((data) => {
-        setPosts(data.data.response);
+      .get(
+        `${BASE_URL}/post/getPostsByUser?page=${page}&pageSize=${itemsRequired}`,
+        {
+          headers: {
+            "Content-Type": "application/type",
+            Authorization: `Bearer ${get("dsh_token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        setPosts((prev) => [...prev, ...response.data.response.posts]);
+        setTotalPostsCount(response.data.response.totalCount);
         setLoading(false);
       });
-  }, []);
+  }
+
+  useEffect(() => {
+    loadPosts();
+  }, [page]);
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
 
   const handleDelete = (post) => {
     const confirmation = window.confirm(
@@ -66,22 +81,42 @@ const ViewAll = () => {
           ></Alertmodal>
 
           <h1 className="display-4 fw-bold text-light-blue my-3">
-            View [{posts.length || 0}]
+            View [{totalPostsCount || 0}]
           </h1>
-          {loading ? (
-            <div className=" my-5">
-              <Homecard count="5" />
+
+          {posts.map((post) => (
+            <div key={post._id}>
+              <SocialCard
+                post={post}
+                handleDelete={handleDelete}
+                isDeleteLoading={isDeleteLoading}
+              />
             </div>
-          ) : (
-            posts.map((post) => (
-              <div key={post._id}>
-                <SocialCard
-                  post={post}
-                  handleDelete={handleDelete}
-                  isDeleteLoading={isDeleteLoading}
-                />
-              </div>
-            ))
+          ))}
+
+          {loading && (
+            <div className="">
+              <Homecard count="3" />
+            </div>
+          )}
+
+          <div className="mb-2">
+            Showing:
+            <b className="mx-2">
+              1-{posts.length}/{totalPostsCount}
+            </b>
+          </div>
+
+          {totalPostsCount !== posts.length && !loading && (
+            <div className=" mb-5 d-flex justify-content-center">
+              <Button
+                variant="none"
+                onClick={() => handleLoadMore()}
+                className="fs-5 p-0 px-2 bg-black rounded-3 text-light-blue border-primary border-2"
+              >
+                Show More
+              </Button>
+            </div>
           )}
 
           {!loading && posts.length === 0 && (

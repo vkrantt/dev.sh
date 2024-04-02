@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Container, Form, Nav, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Tags from "../../components/tags/Tags";
 import { Link, useLocation } from "react-router-dom";
 import { capitalText } from "../../utils/utility";
