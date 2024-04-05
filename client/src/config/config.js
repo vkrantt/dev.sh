@@ -2,15 +2,13 @@
 export const BASE_URL = "https://dev-sh-hwg0.onrender.com/api";
 
 export const toastConfig = {
-  duration: 2000,
+  duration: 5000,
   style: {
-    border: "1px solid var(--theme)",
-    padding: "16px",
-    borderRadius: "0px",
+    border: "2px solid var(--blue)",
+    padding: "3px 10px",
     color: "var(--theme)",
-  },
-  iconTheme: {
-    primary: "var(--theme)",
-    secondary: "#fff",
+
+    borderRadius: "10px",
+    background: "#000",
   },
 };

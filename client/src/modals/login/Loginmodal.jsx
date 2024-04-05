@@ -4,6 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 import Login from "../../components/auth/login/Login";
 import Signup from "../../components/auth/signup/Signup";
 import Logo from "../../components/logo/Logo";
+import { Link } from "react-router-dom";
 
 const LoginModal = ({ handleShow, handleClose }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,16 +22,25 @@ const LoginModal = ({ handleShow, handleClose }) => {
               <Signup handleClose={handleClose} />
             )}
 
-            <div className="mt-3">
+            <div className="mt-3 d-flex justify-content-between align-items-center ">
               <Button
                 variant="none"
-                className="text-primary"
+                className="text-primary mx-0 p-0 m-0"
                 onClick={() => setIsLogin(!isLogin)}
               >
                 {isLogin
                   ? "don't have any account?"
                   : "Already have an account?"}
               </Button>
+
+              {isLogin && (
+                <div className="">
+                  Forgot Password?{" "}
+                  <Link onClick={handleClose} to="/forgot-password">
+                    Change
+                  </Link>
+                </div>
+              )}
             </div>
           </>
         </Modal.Body>

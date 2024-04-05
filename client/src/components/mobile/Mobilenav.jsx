@@ -10,7 +10,6 @@ import { getUserDetail } from "../../services/user";
 const Mobilenav = () => {
   const { pathname } = useLocation();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  console.log("-----", pathname);
   const [user] = useState(getUserDetail());
   const token = get("dsh_token");
 

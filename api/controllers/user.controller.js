@@ -1,3 +1,4 @@
+import BASE_URL from "../../config.js";
 import getToken from "../config/token.js";
 import throwError from "../handlers/error.handler.js";
 import Post from "../models/post.model.js";
@@ -341,4 +342,54 @@ export async function getAllFollowings(req, res) {
       error: error,
     });
   }
+}
+
+// Search User
+export async function findUserByEmail(req, res) {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email }).select("email firstName");
+    if (!user) {
+      res.status(404).json({
+        status: "error",
+        response: "User not found",
+      });
+    } else {
+      const url = `${BASE_URL}/change-password?id=${user._id}`;
+      res.json({
+        status: 200,
+        response: "Email sent, You can reset your password now.",
+        url,
+        firstName: user.firstName,
+        to_email: user.email,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      error: error,
+    });
+  }
+}
+
+// reset password
+export async function changePassword(req, res) {
+  const { id } = req.params;
+  const { newPassword } = req.body;
+  const user = await User.findOne({ _id: id });
+  if (!user) {
+    return res.json({
+      status: 404,
+      response: "User Not found.",
+    });
+  }
+
+  const hash = await bcrypt.hash(newPassword, 10);
+
+  await User.findByIdAndUpdate(id, { $set: { password: hash } });
+
+  res.status(200).json({
+    status: "ok",
+    response: "Password updated successfully.",
+  });
 }

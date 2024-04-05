@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import Loader from "../../loader/Loader";
 import axios from "axios";
 import { BASE_URL } from "../../../config/config";
@@ -64,7 +64,6 @@ const Login = ({ handleClose }) => {
             placeholder="name@example.com"
             type="email"
             name="email"
-            autoComplete
             onChange={handleChange}
             value={credentials.email}
           />
@@ -78,7 +77,6 @@ const Login = ({ handleClose }) => {
               type={show ? "text" : "password"}
               placeholder="Password"
               name="password"
-              autoComplete
               onChange={handleChange}
               value={credentials.password}
             />

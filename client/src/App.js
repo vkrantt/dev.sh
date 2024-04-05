@@ -20,6 +20,8 @@ import Following from "./pages/user/following/Following";
 import Lists from "./pages/lists/Lists";
 import Mobilenav from "./components/mobile/Mobilenav";
 import ViewAllPosts from "./pages/view-all-posts/ViewAllPosts";
+import ForgotPassword from "./pages/forgot-password/ForgotPassword";
+import ChangePassword from "./components/change-password/ChangePassword";
 
 const App = () => {
   const [user] = useState(getUserDetail());
@@ -81,6 +83,8 @@ const App = () => {
             path="/user/following"
             element={<Authguard children={<Following />} />}
           />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </div>
